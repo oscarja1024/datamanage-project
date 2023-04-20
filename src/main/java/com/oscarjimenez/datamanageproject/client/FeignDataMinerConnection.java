@@ -1,13 +1,13 @@
 package com.oscarjimenez.datamanageproject.client;
 
+import com.oscarjimenez.dataminerproject.api.DTOS.ControllerDTO.MinerDTO;
+import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "FeignDataMinerConnection", url = "${hearthstoneMiner.url}")
 public interface FeignDataMinerConnection {
-
-
     @GetMapping(path="/hearthstoneMiner/metadata", produces = "application/json")
     Object getMetadata();
 
@@ -24,16 +24,16 @@ public interface FeignDataMinerConnection {
     Object getCardBacksSort(@RequestBody Object request);
 
     @GetMapping(path="/hearthstoneMiner/cardBacksByCategorySort", produces = "application/json")
-    Object getCardBacksCategorySort(@RequestBody Object request);
+    DeckDTO getCardBacksCategorySort(@RequestBody MinerDTO request);
 
     @GetMapping(path="/hearthstoneMiner/decksByCardsAndHero", produces = "application/json")
-    Object getDeckByCardListAndHero(@RequestBody Object request);
+    DeckDTO getDeckByCardListAndHero(@RequestBody MinerDTO request);
 
     @GetMapping(path="/hearthstoneMiner/decksByCards", produces = "application/json")
-    Object getDeckByCardListAutoHero(@RequestBody Object request);
+    DeckDTO getDeckByCardListAutoHero(@RequestBody MinerDTO request);
 
     @GetMapping(path="/hearthstoneMiner/decksByCode", produces = "application/json")
-    Object getDeckByCode(@RequestBody Object request);
+    DeckDTO getDeckByCode(@RequestBody MinerDTO request);
 
     @GetMapping(path="/hearthstoneMiner/oneCard", produces = "application/json")
     Object getOneCardById(@RequestBody Object request);
