@@ -1,7 +1,11 @@
 package com.oscarjimenez.datamanageproject.domain.DTOrequest;
 
-import java.util.List;
+import lombok.Builder;
+import lombok.Data;
 
+import java.util.List;
+@Data
+@Builder
 public class GameUserDataRequest {
 
 
@@ -10,6 +14,7 @@ public class GameUserDataRequest {
     String cardId;
     List<String> cardsIds;
     String deckId;
+    String heroId;
     int wins;
     int lost;
     double averageMana;
@@ -28,5 +33,7 @@ public class GameUserDataRequest {
     int minionsInDeck;
     int cardsInDeck;
     int cardsThatCreateOtherCards;
+    String cardId2;
+    String winnerCardVsCard;
 
 }

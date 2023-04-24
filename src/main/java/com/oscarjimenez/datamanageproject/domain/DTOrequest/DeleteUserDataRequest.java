@@ -1,5 +1,10 @@
 package com.oscarjimenez.datamanageproject.domain.DTOrequest;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public class DeleteUserDataRequest {
 
     String dataSource;
@@ -8,6 +13,8 @@ public class DeleteUserDataRequest {
 
     Filter filter;
 
+    @Data
+    @Builder
     public class Filter{
         String userId;
 

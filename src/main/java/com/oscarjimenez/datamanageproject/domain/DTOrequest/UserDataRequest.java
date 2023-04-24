@@ -1,5 +1,11 @@
 package com.oscarjimenez.datamanageproject.domain.DTOrequest;
 
+import lombok.Builder;
+import lombok.Data;
+import org.bson.codecs.pojo.annotations.BsonDiscriminator;
+
+@Data
+@Builder
 public class UserDataRequest {
 
     String dataSource;
@@ -8,6 +14,8 @@ public class UserDataRequest {
 
     Document document;
 
+    @Data
+    @Builder
     public class Document{
         String id;
         String nickName;
@@ -16,7 +24,7 @@ public class UserDataRequest {
         String gender;
         String age;
         String email;
-        String passwd;
+        String basicAuth;
     }
 
 

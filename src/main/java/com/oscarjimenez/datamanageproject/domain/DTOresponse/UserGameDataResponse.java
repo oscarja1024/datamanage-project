@@ -1,7 +1,12 @@
 package com.oscarjimenez.datamanageproject.domain.DTOresponse;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.util.List;
 
+@Data
+@Builder
 public class UserGameDataResponse {
 
 
@@ -10,6 +15,7 @@ public class UserGameDataResponse {
     String cardId;
     List<String> cardsIds;
     String deckId;
+    String heroeId;
     int wins;
     int lost;
     double averageMana;
