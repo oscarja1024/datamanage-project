@@ -1,5 +1,6 @@
 package com.oscarjimenez.datamanageproject.service;
 
+import com.oscarjimenez.datamanageproject.service.DTO.SortDTO;
 import com.oscarjimenez.dataminerproject.api.DTOS.CardRequestDTO;
 import com.oscarjimenez.dataminerproject.api.DTOS.ControllerDTO.MinerDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.GetCardsResponseDTO;
@@ -7,14 +8,16 @@ import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 public interface CardDataFinderService {
 
 
-    GetOneCardResponseDTO getOneCardById(Object request);
+    GetOneCardResponseDTO getOneCardById(String cardId);
 
-    GetCardsResponseDTO getAllCards(Object request);
+    List<GetCardsResponseDTO> getAllCards();
 
-    GetCardsResponseDTO getAllCardsSort(Object request);
+    GetCardsResponseDTO getAllCardsSort(SortDTO sort);
 
     GetCardsResponseDTO getAllCardsSetPageSize(Object request);
 

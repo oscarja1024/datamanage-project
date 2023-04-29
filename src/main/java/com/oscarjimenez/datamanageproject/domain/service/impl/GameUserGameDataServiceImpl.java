@@ -14,11 +14,11 @@ public class GameUserGameDataServiceImpl implements GameUserGameDataService {
     @Autowired
     private FeignMongodbConnection feignMongodbConnection;
 
-    InsertedId saveGameData(GameUserDataRequest gameUserDataRequest){
+    public InsertedId saveGameData(GameUserDataRequest gameUserDataRequest){
         return feignMongodbConnection.insertGameUserData(utilityDomainClass.getApiKey(), gameUserDataRequest);
     }
 
-    UserGameDataResponse getGameData(String gameId, String userId){
+    public UserGameDataResponse getGameData(String gameId, String userId){
         var gameReport = feignMongodbConnection.findUserGameData(utilityDomainClass.getApiKey()
                 , FindGameUserDataRequest.builder().filter(FindGameUserDataRequest.Filter.builder().gameId(gameId).userId(userId).build()).build());
         return UserGameDataResponse.builder()
