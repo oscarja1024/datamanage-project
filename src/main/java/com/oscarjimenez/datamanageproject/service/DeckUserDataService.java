@@ -3,7 +3,6 @@ package com.oscarjimenez.datamanageproject.service;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.UpdateResponse;
 import com.oscarjimenez.datamanageproject.service.DTO.ChangeId;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
-import com.oscarjimenez.datamanageproject.service.DTO.DeckStadisticsDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.PuntuationDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
 public interface DeckUserDataService {
