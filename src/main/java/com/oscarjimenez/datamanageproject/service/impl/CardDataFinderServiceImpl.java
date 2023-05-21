@@ -2,6 +2,8 @@ package com.oscarjimenez.datamanageproject.service.impl;
 
 import com.oscarjimenez.datamanageproject.client.FeignDataMinerConnection;
 import com.oscarjimenez.datamanageproject.service.CardDataFinderService;
+import com.oscarjimenez.datamanageproject.service.DTO.AttackDTO;
+import com.oscarjimenez.datamanageproject.service.DTO.HealthDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.ManaDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.SortDTO;
 import com.oscarjimenez.dataminerproject.api.DTOS.ControllerDTO.MinerDTO;
@@ -278,6 +280,6 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
             result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
         }
 
-        return resultado;return null;
+        return resultado;
     }
 }

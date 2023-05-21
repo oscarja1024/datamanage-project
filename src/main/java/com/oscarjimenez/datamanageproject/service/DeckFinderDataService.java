@@ -3,12 +3,14 @@ package com.oscarjimenez.datamanageproject.service;
 import com.oscarjimenez.dataminerproject.api.DTOS.ControllerDTO.MinerDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
 
+import java.util.List;
+
 public interface DeckFinderDataService {
 
-    DeckDTO getDeckByCardListAndHero(MinerDTO minerDTO);
+    DeckDTO getDeckByCardListAndHero(List<String> cardIds, String heroId);
 
-    DeckDTO getDeckByCardListAutoHero(MinerDTO minerDTO);
+    DeckDTO getDeckByCardListAutoHero(List<String> cardIds);
 
-    DeckDTO getDeckByCode(MinerDTO minerDTO);
+    DeckDTO getDeckByCode(String code);
 
 }

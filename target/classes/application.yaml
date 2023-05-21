@@ -1,4 +1,9 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://cluster0.9xontdn.mongodb.net/test?authMechanism=MONGODB-X509&authSource=%24external&tls=true&tlsCertificateKeyFile=E%3A%5CX509-cert-956921310671160450.pem
+      data-api:
+        base-url: https://eu-west-2.aws.data.mongodb-api.com/app/data-rieuu/endpoint/data/v1/action/
+        api-key: tizotQWBLnkJEBYvvCKbJ8UA2McbB9BstP3WHy19Lx1XAZDFnz5Bl3RkonJKNAHz
+        dataSource: Cluster0
+        database: gameanalytics-project
+

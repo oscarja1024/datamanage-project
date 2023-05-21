@@ -36,6 +36,9 @@ public interface FeignMongodbConnection {
     @PostMapping(path="/updateOne")
     UpdateResponse updateUserData(@RequestHeader("apiKey")String apiKey, @RequestBody UserDataRequest userDataRequest);
 
+    @PostMapping(path="/updateOne")
+    UpdateResponse updateUserGameData(@RequestHeader("apiKey")String apiKey, @RequestBody GameUserDataRequest gameUserDataRequest);
+
     @PostMapping(path="/findOne")
     UserDataRequest.Document findUserData(@RequestHeader("apiKey")String apiKey, @RequestBody FindUserDataRequest findUserDataRequest);
 

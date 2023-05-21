@@ -1,12 +1,11 @@
 package com.oscarjimenez.datamanageproject.service;
 
+import com.oscarjimenez.datamanageproject.service.DTO.AttackDTO;
+import com.oscarjimenez.datamanageproject.service.DTO.HealthDTO;
+import com.oscarjimenez.datamanageproject.service.DTO.ManaDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.SortDTO;
-import com.oscarjimenez.dataminerproject.api.DTOS.CardRequestDTO;
-import com.oscarjimenez.dataminerproject.api.DTOS.ControllerDTO.MinerDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.GetCardsResponseDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -19,29 +18,29 @@ public interface CardDataFinderService {
 
     GetCardsResponseDTO getAllCardsSort(SortDTO sort);
 
-    GetCardsResponseDTO getAllCardsSetPageSize(Object request);
+    GetCardsResponseDTO getAllCardsSetPageSize(String pageSize);
 
-    GetCardsResponseDTO getAllCardsByPageSetPageSizeSort(MinerDTO minerDTO);
+    GetCardsResponseDTO getAllCardsByPageSetPageSizeSort(SortDTO sort, String pageSize);
 
-    GetCardsResponseDTO getAllCardsByManaCost(MinerDTO minerDTO);
+    GetCardsResponseDTO getAllCardsByManaCost(ManaDTO mana);
 
-    GetCardsResponseDTO getAllCardsByManaCostAndAttack(MinerDTO minerDTO);
+    GetCardsResponseDTO getAllCardsByManaCostAndAttack(ManaDTO mana, AttackDTO attack);
 
-    GetCardsResponseDTO getAllCardsByAttack(MinerDTO minerDTO);
+    GetCardsResponseDTO getAllCardsByAttack(AttackDTO attack);
 
-    GetCardsResponseDTO getAllCardsByType(MinerDTO minerDTO);
+    GetCardsResponseDTO getAllCardsByType(String cardType);
 
-    GetCardsResponseDTO getAllCardsByTypeAndAttack(MinerDTO minerDTO);
+    GetCardsResponseDTO getAllCardsByTypeAndAttack(String cardType, AttackDTO attack);
 
-    GetCardsResponseDTO getAllCardsByTypeAndManaCost(MinerDTO minerDTO);
+    GetCardsResponseDTO getAllCardsByTypeAndManaCost(String cardType,ManaDTO mana);
 
-    GetCardsResponseDTO getAllCardsByTypeAndAttackAndManaCost(MinerDTO minerDTO);
+    GetCardsResponseDTO getAllCardsByTypeAndAttackAndManaCost(String cardType,ManaDTO mana,AttackDTO attack);
 
-    GetCardsResponseDTO getAllCardsByHealth(MinerDTO minerDTO);
+    GetCardsResponseDTO getAllCardsByHealth(HealthDTO health);
 
-    GetCardsResponseDTO getAllCardsByGameMode(MinerDTO minerDTO);
+    GetCardsResponseDTO getAllCardsByGameMode(String gameMode);
 
-    GetCardsResponseDTO getAllCardsBySpellSchool(MinerDTO minerDTO);
+    GetCardsResponseDTO getAllCardsBySpellSchool(String spellSchool);
 
-    GetCardsResponseDTO getAllCardsBySet(MinerDTO minerDTO);
+    GetCardsResponseDTO getAllCardsBySet(String cardSet);
 }

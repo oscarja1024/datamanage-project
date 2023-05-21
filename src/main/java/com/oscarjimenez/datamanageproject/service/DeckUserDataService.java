@@ -1,5 +1,6 @@
 package com.oscarjimenez.datamanageproject.service;
 
+import com.oscarjimenez.datamanageproject.domain.DTOresponse.UpdateResponse;
 import com.oscarjimenez.datamanageproject.service.DTO.ChangeId;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckStadisticsDTO;
@@ -12,10 +13,10 @@ public interface DeckUserDataService {
 
     boolean saveOwnedDeck(DeckDTO deckDTO);
 
-    ChangeId saveDeckPuntuation(PuntuationDTO puntuation, String deckId, String userId);
+    UpdateResponse saveDeckPuntuation(PuntuationDTO puntuation, String deckId, String userId);
 
     DeckReportDTO getDeckReport(String deckReportId, String deckId, String userId);
 
-    ChangeId generateDeckResport(String deckId, String userId);
+    boolean generateDeckResport(String deckId, String userId);
 
 }

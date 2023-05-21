@@ -4,6 +4,7 @@ import com.oscarjimenez.dataminerproject.api.DTOS.ControllerDTO.MinerDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.GetCardsResponseDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
+import com.oscarjimenez.dataminerproject.client.DTOS.MetadataResponseDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "FeignDataMinerConnection", url = "${hearthstoneMiner.url}")
 public interface FeignDataMinerConnection {
     @GetMapping(path="/hearthstoneMiner/metadata", produces = "application/json")
-    Object getMetadata();
+    MetadataResponseDTO getMetadata();
 
     @GetMapping(path="/hearthstoneMiner/cardBacksById", produces = "application/json")
     Object getCardsBackById(@RequestBody Object request);

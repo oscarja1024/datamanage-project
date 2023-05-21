@@ -14,9 +14,9 @@ public interface GameDataUserService {
 
     ChangeId generateNewGame(String userId);
 
-    GameReportDTO getGameReport(String gameId, String userId);
+    ResultGameDTO getGameReport(String gameId, String userId);
 
-    ChangeId saveGameReport(GameReportDTO gameReport, String userId);
+    ChangeId saveGameReport(ResultGameDTO gameReport, String userId);
 
     ChangeId saveUserAnnotations(UserAnnotationsDTO userAnnotationsDTO);
 }

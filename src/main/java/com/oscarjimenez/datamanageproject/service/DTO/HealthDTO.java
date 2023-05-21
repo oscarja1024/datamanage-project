@@ -7,7 +7,7 @@ import lombok.extern.jackson.Jacksonized;
 @Data
 @Jacksonized
 @Builder
-public class PuntuationDTO {
+public class HealthDTO {
 
-    private int deckPoints;
+    private String health;
 }
