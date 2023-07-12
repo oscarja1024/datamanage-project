@@ -28,7 +28,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
     @Override
     public GetOneCardResponseDTO getOneCardById(String cardId) {
 
-        var request = MinerDTO.builder().cardId(cardId).build();
+        var request = MinerDTO.builder().cardId(cardId).page("0").build();
 
         return feignDataMinerConnection.getOneCardById(request);
     }

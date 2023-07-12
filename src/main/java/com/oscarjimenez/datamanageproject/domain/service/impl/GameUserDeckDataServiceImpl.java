@@ -10,10 +10,12 @@ import com.oscarjimenez.datamanageproject.domain.utils.utilityDomainClass;
 import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.HeroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class GameUserDeckDataServiceImpl implements GameUserDeckDataService {
     @Autowired
     private FeignMongodbConnection feignMongodbConnection;

@@ -5,6 +5,7 @@ import com.oscarjimenez.datamanageproject.domain.DTOresponse.UserGameDataRespons
 
 import java.util.UUID;
 
+
 public interface GameUserCardDataService {
 
 

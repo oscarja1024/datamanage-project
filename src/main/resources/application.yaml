@@ -7,3 +7,5 @@ spring:
         dataSource: Cluster0
         database: gameanalytics-project
 
+hearthstoneMiner:
+  url: http://localhost:7373

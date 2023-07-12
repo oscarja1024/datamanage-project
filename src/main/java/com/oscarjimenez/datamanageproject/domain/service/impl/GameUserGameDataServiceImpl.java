@@ -8,9 +8,11 @@ import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
 import com.oscarjimenez.datamanageproject.domain.service.GameUserGameDataService;
 import com.oscarjimenez.datamanageproject.domain.utils.utilityDomainClass;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class GameUserGameDataServiceImpl implements GameUserGameDataService {
 
     @Autowired

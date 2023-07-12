@@ -13,14 +13,12 @@ import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.MetadataResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping(path = "/miner")
 public class MinerDataAccesController {
 
     @Autowired
@@ -32,7 +30,7 @@ public class MinerDataAccesController {
     @Autowired
     private MetadataFinderService metadataFinderService;
 
-    @GetMapping
+    @GetMapping("/metadata")
     public ResponseEntity<MetadataResponseDTO> getAllMetadata() {
         MetadataResponseDTO metadata = metadataFinderService.getAllMetada();
         return ResponseEntity.ok(metadata);
@@ -63,7 +61,7 @@ public class MinerDataAccesController {
         return ResponseEntity.ok(card);
     }
 
-    @GetMapping
+    @GetMapping("cards")
     public ResponseEntity<List<GetCardsResponseDTO>> getAllCards() {
         List<GetCardsResponseDTO> cards = cardDataService.getAllCards();
         return ResponseEntity.ok(cards);

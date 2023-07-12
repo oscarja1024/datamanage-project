@@ -8,9 +8,11 @@ import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
 import com.oscarjimenez.datamanageproject.domain.service.GameUserCardDataService;
 import com.oscarjimenez.datamanageproject.domain.utils.utilityDomainClass;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class GameUserCardDataServiceImpl implements GameUserCardDataService {
     @Autowired
     private FeignMongodbConnection feignMongodbConnection;

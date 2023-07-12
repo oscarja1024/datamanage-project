@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "FeignDataMinerConnection", url = "${hearthstoneMiner.url}")
 public interface FeignDataMinerConnection {
+
     @GetMapping(path="/hearthstoneMiner/metadata", produces = "application/json")
     MetadataResponseDTO getMetadata();
 
-    @GetMapping(path="/hearthstoneMiner/cardBacksById", produces = "application/json")
-    Object getCardsBackById(@RequestBody Object request);
-
-    @GetMapping(path="/hearthstoneMiner/decksByCardsAndHero", produces = "application/json")
+    @GetMapping(path="/hearthstoneMiner/decksByCardsAndHero",consumes = "application/json" , produces = "application/json")
     DeckDTO getDeckByCardListAndHero(@RequestBody MinerDTO request);
 
     @GetMapping(path="/hearthstoneMiner/decksByCards", produces = "application/json")

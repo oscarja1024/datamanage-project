@@ -12,7 +12,6 @@ import static java.lang.Integer.parseInt;
 @Service
 public class CardDataClasifierServiceImpl implements CardDataClasifierService {
 
-
     @Autowired
     CardDataFinderServiceImpl cardDataFinderService;
 
