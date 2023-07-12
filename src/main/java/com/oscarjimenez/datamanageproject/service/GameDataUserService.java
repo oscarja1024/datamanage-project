@@ -1,22 +1,15 @@
 package com.oscarjimenez.datamanageproject.service;
 
+import com.oscarjimenez.datamanageproject.domain.DTOresponse.InsertedId;
 import com.oscarjimenez.datamanageproject.service.DTO.*;
+
+import java.util.UUID;
 
 public interface GameDataUserService {
 
-    ChangeId saveTotalDamageToHero(DamageDTO damageToHero);
 
-    ChangeId saveTotalDamageToMinions(DamageDTO damageToMinions);
+    ResultGameDTO getGameReport(UUID gameId, UUID userId);
 
-    ChangeId saveManaCostOfGame(ManaDTO manaCost);
+    InsertedId saveGameReport(ResultGameDTO gameReport, UUID userId);
 
-    ChangeId saveLostWinOfGame(ResultGameDTO result);
-
-    ChangeId generateNewGame(String userId);
-
-    ResultGameDTO getGameReport(String gameId, String userId);
-
-    ChangeId saveGameReport(ResultGameDTO gameReport, String userId);
-
-    ChangeId saveUserAnnotations(UserAnnotationsDTO userAnnotationsDTO);
 }

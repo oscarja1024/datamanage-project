@@ -3,6 +3,8 @@ package com.oscarjimenez.datamanageproject.domain.DTOrequest;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @Builder
 public class FindGameUserDataRequest {
@@ -15,12 +17,12 @@ public class FindGameUserDataRequest {
     @Data
     @Builder
     public class Filter{
-        String userId;
+        UUID userId;
 
-        String deckId;
+        UUID deckId;
 
-        String cardId;
+        UUID cardId;
 
-        String gameId;
+        UUID gameId;
     }
 }

@@ -3,6 +3,8 @@ package com.oscarjimenez.datamanageproject.domain.DTOrequest;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @Builder
 public class DeleteUserDataRequest {
@@ -16,7 +18,7 @@ public class DeleteUserDataRequest {
     @Data
     @Builder
     public class Filter{
-        String userId;
+        UUID userId;
 
     }
 }

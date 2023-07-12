@@ -1,5 +1,6 @@
 package com.oscarjimenez.datamanageproject.service.impl;
 
+import com.oscarjimenez.datamanageproject.api.utils.constants;
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.FindGameUserDataRequest;
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.GameUserDataRequest;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.UpdateResponse;
@@ -7,11 +8,18 @@ import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
 import com.oscarjimenez.datamanageproject.service.DTO.ChangeId;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.PuntuationDTO;
+import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
 import com.oscarjimenez.datamanageproject.service.DeckUserDataService;
 import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
+import com.oscarjimenez.dataminerproject.client.DTOS.GetCardsResponseDTO;
+import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.ConditionalOperators;
 
 import java.beans.PropertyEditorSupport;
+import java.util.List;
+import java.util.UUID;
 
 public class DeckUseDataServiceImpl implements DeckUserDataService {
 
@@ -24,11 +32,11 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
     private String apiKey;
 
     @Override
-    public DeckDTO findByUserIdandDeckId(String userId, String deckId) {
+    public DeckDTO findByUserIdandDeckId(UUID userId, String deckId) {
 
         var deckCardListByUser = feignMongodbConnection.findUserGameData(apiKey, FindGameUserDataRequest.builder().build());
 
-        return deckFinderDataService.getDeckByCardListAndHero(deckCardListByUser.getCardsIds(),deckCardListByUser.getUserId());
+        return deckFinderDataService.getDeckByCardListAndHero(deckCardListByUser.getCards().getCardIds(), "");
     }
 
     @Override
@@ -55,15 +63,116 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
         return DeckReportDTO.builder().build();
     }
 
+    public PuntuationDTO getDeckPuntuation(UUID deckId, UUID userId) {
+
+        var deckData = feignMongodbConnection.findUserGameDataOne(apiKey, FindGameUserDataRequest.builder().filter(FindGameUserDataRequest.Filter.builder().deckId(deckId).userId(userId).build()).build());
+
+        return deckData.getPuntuation();
+    }
+
     @Override
-    public boolean generateDeckResport(String deckId, String userId) {
+    public boolean generateDeckResport(String deckId, UUID userId) {
 
         var ownedDeck = this.findByUserIdandDeckId(userId,deckId);
 
-        var deckReport = DeckReportDTO.builder().build();
+        var deckReport = DeckReportDTO.builder()
+                .deckId(ownedDeck.getDeckCode())
+                .cardCount(String.valueOf(ownedDeck.getCardCount()))
+                .attackMean(this.calculateMean(ownedDeck.getCards(), constants.ATTACK))
+                .manaMean(this.calculateMean(ownedDeck.getCards(), constants.MANA))
+                .healthMean(this.calculateMean(ownedDeck.getCards(), constants.HEALTH))
+                .spellsMean(this.calculateMean(ownedDeck.getCards(), constants.SPELLS))
+                .minionCount(this.calculateMean(ownedDeck.getCards(), constants.MINION))
+                .puntuationDTO(this.getDeckPuntuation(ownedDeck.getDeckCode(), userId))
+                .secretsCount(this.calculateMean(ownedDeck.getCards(), constants.SECRET))
+                .attackIncrease(this.calculateMean(ownedDeck.getCards(), constants.INCRESE))
+                .healMean(this.calculateMean(ownedDeck.getCards(), constants.HEAL))
+                .build(); // Se puede mejorar recorriendo solo una vez la lista
 
-        var insertedID = feignMongodbConnection.insertGameUserData(apiKey, GameUserDataRequest.builder().build());
+        var insertedID = feignMongodbConnection.insertGameUserData(apiKey, GameUserDataRequest.builder().userId(userId).deckReport(deckReport).build());
 
         return insertedID.toString().isEmpty() || insertedID.toString().isBlank();
     }
+
+    private String calculateMean(List<GetOneCardResponseDTO> cards, String value){
+
+        String result = "";
+
+        double mean = 0;
+
+        for(GetOneCardResponseDTO card : cards) {
+            int number = 0;
+            switch (value){
+                case constants.ATTACK:
+                    number = Integer.parseInt(card.getAttack());
+                    break;
+                case constants.MANA:
+                    number = Integer.parseInt(card.getManaCost());
+                    break;
+                case constants.HEALTH:
+                    number = Integer.parseInt(card.getHealth());
+                    break;
+                case constants.SPELLS:
+                case constants.SECRET:
+                case constants.MINION:
+                    number = this.whatIs(card);
+                    mean = mean + number;
+                    return String.valueOf(mean);
+                case constants.INCRESE:
+                    number = this.increaseAttack(card.getText());
+                    mean = mean + number;
+                case constants.HEAL:
+                    number = this.increaseHeal(card.getText());
+
+            }
+            mean = mean + number;
+        }
+
+        result = String.valueOf(mean/cards.size());
+
+        return result;
+
+    }
+
+    private int whatIs(GetOneCardResponseDTO card){
+
+        int result = 0;
+
+        switch (card.getCardTypeId()){
+            case "5":
+            case "3":
+            case "4" :
+                result = 1;
+                break;
+
+        }
+
+        return result;
+    }
+
+    private int increaseAttack(String text){
+
+        int result = 0;
+
+        if(text.contains("Attack") && text.contains("+") ){
+            result = 1;
+        }
+
+        return result;
+
+    }
+
+    private int increaseHeal(String text){
+
+        int result = 0;
+
+        if(text.contains("Health") && (text.contains("give") || text.contains("gain") || text.contains("restore"))){
+            result = 1;
+        }
+
+        return result;
+
+    }
 }
+
+

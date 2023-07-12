@@ -8,7 +8,9 @@ import com.oscarjimenez.dataminerproject.client.DTOS.MetadataResponseDTO;
 import feign.FeignException;
 import feign.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MetadataClasifierServiceImpl implements MetadataClasifierService {
 
     @Autowired

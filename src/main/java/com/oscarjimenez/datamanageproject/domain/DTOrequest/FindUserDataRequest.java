@@ -3,6 +3,8 @@ package com.oscarjimenez.datamanageproject.domain.DTOrequest;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @Builder
 public class FindUserDataRequest {
@@ -16,7 +18,7 @@ public class FindUserDataRequest {
     @Data
     @Builder
     public class Filter{
-        String userId;
+        UUID userId;
 
         String email;
     }

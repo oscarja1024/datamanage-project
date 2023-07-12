@@ -9,6 +9,8 @@ import com.oscarjimenez.datamanageproject.domain.service.GameUserGameDataService
 import com.oscarjimenez.datamanageproject.domain.utils.utilityDomainClass;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.UUID;
+
 public class GameUserGameDataServiceImpl implements GameUserGameDataService {
 
     @Autowired
@@ -18,18 +20,11 @@ public class GameUserGameDataServiceImpl implements GameUserGameDataService {
         return feignMongodbConnection.insertGameUserData(utilityDomainClass.getApiKey(), gameUserDataRequest);
     }
 
-    public UserGameDataResponse getGameData(String gameId, String userId){
+    public UserGameDataResponse getGameData(UUID gameId, UUID userId){
         var gameReport = feignMongodbConnection.findUserGameData(utilityDomainClass.getApiKey()
                 , FindGameUserDataRequest.builder().filter(FindGameUserDataRequest.Filter.builder().gameId(gameId).userId(userId).build()).build());
         return UserGameDataResponse.builder()
-                .gameId(gameReport.getGameId())
-                .deckRate(gameReport.getDeckRate())
-                .openentDeckSteal(gameReport.getOpenentDeckSteal())
-                .userAnnotations(gameReport.getUserAnnotations())
-                .wins(gameReport.getWins())
-                .lost(gameReport.getLost())
-                .totalAttackToMinions(gameReport.getTotalAttackToMinions())
-                .totalAttackToHeroes(gameReport.getTotalAttackToHeroes())
+                .resultGame(gameReport.getResultGame())
                 .build();
     }
 }

@@ -6,10 +6,11 @@ import com.oscarjimenez.dataminerproject.api.DTOS.ControllerDTO.MinerDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.HeroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
+@Service
 public class DeckFinderDataServiceImpl implements DeckFinderDataService {
 
     @Autowired

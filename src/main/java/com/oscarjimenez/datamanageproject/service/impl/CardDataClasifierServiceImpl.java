@@ -4,9 +4,12 @@ import com.oscarjimenez.datamanageproject.domain.service.GameUserCardDataService
 import com.oscarjimenez.datamanageproject.service.CardDataClasifierService;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultCardDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 import static java.lang.Integer.parseInt;
-
+@Service
 public class CardDataClasifierServiceImpl implements CardDataClasifierService {
 
 
@@ -42,7 +45,7 @@ public class CardDataClasifierServiceImpl implements CardDataClasifierService {
     }
 
     @Override
-    public boolean saveFavoriteCards(String cardID, String userId) throws Exception {
+    public boolean saveFavoriteCards(String cardID, UUID userId) throws Exception {
 
         try {
             gameUserCardDataService.saveFavCard(userId,cardID);

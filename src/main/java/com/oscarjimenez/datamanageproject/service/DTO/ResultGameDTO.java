@@ -1,5 +1,6 @@
 package com.oscarjimenez.datamanageproject.service.DTO;
 
+import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
@@ -23,5 +24,6 @@ public class ResultGameDTO {
     private String numberOfSpellsUsed;
     private UserAnnotationsDTO userAnnotationsDTO;
     private PuntuationDTO deckPuntuationUtility;
+    private DeckDTO deckUsedInGame;
 
 }

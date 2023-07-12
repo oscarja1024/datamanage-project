@@ -5,14 +5,15 @@ import com.oscarjimenez.datamanageproject.domain.DTOresponse.InsertedId;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.UserGameDataResponse;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface GameUserDeckDataService {
 
-    InsertedId insertOwnedDeck(List<String> cardIds, String heroId, String userId, String deckId);
+    InsertedId insertOwnedDeck(List<String> cardIds, String heroId, UUID userId, UUID deckId);
 
-    UserGameDataResponse getOwnedDeck(String deckId, String userId);
+    UserGameDataResponse getOwnedDeck(UUID deckId, UUID userId);
 
     InsertedId insertDeckReport(GameUserDataRequest gameUserDataRequest);
 
-    UserGameDataResponse getDeckDataReport(String deckId, String userId);
+    UserGameDataResponse getDeckDataReport(UUID deckId, UUID userId);
 }

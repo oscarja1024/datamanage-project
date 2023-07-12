@@ -4,12 +4,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
 
+import java.util.UUID;
+
 @Data
 @Jacksonized
 @Builder
 public class DeckReportDTO {
 
-    private String deckId;
+    private UUID deckId;
     private String manaMean;
     private String attackMean;
     private PuntuationDTO puntuationDTO;

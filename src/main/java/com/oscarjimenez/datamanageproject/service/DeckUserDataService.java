@@ -5,10 +5,13 @@ import com.oscarjimenez.datamanageproject.service.DTO.ChangeId;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.PuntuationDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
+
+import java.util.UUID;
+
 public interface DeckUserDataService {
 
 
-    DeckDTO findByUserIdandDeckId(String userId, String deckId);
+    DeckDTO findByUserIdandDeckId(UUID userId, String deckId);
 
     boolean saveOwnedDeck(DeckDTO deckDTO);
 
@@ -16,6 +19,6 @@ public interface DeckUserDataService {
 
     DeckReportDTO getDeckReport(String deckReportId, String deckId, String userId);
 
-    boolean generateDeckResport(String deckId, String userId);
+    boolean generateDeckResport(String deckId, UUID userId);
 
 }

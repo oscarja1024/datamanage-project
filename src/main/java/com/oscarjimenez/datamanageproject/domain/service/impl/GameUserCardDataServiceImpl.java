@@ -9,26 +9,28 @@ import com.oscarjimenez.datamanageproject.domain.service.GameUserCardDataService
 import com.oscarjimenez.datamanageproject.domain.utils.utilityDomainClass;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.UUID;
+
 public class GameUserCardDataServiceImpl implements GameUserCardDataService {
     @Autowired
     private FeignMongodbConnection feignMongodbConnection;
 
-    public InsertedId saveFavCard(String userId, String cardId){
+    public InsertedId saveFavCard(UUID userId, String cardId){
         return feignMongodbConnection.insertGameUserData(utilityDomainClass.getApiKey()
                 , GameUserDataRequest.builder().userId(userId).cardId(cardId).build());
     }
 
-    public InsertedId saveResultCardVsCard(String userId, String cardId1, String cardId2, String winnerId){
+    public InsertedId saveResultCardVsCard(UUID userId, String cardId1, String cardId2, String winnerId){
         return  feignMongodbConnection.insertGameUserData(utilityDomainClass.getApiKey()
                 , GameUserDataRequest.builder().userId(userId).cardId(cardId1).cardId2(cardId2).winnerCardVsCard(winnerId).build());
     }
 
-    public UserGameDataResponse getFavCards(String userId){
+    public UserGameDataResponse getFavCards(UUID userId){
         var userFavCards = feignMongodbConnection.findUserGameData(utilityDomainClass.getApiKey()
                 , FindGameUserDataRequest.builder().
                         filter(FindGameUserDataRequest.Filter.builder().userId(userId).build())
                         .build());
-        return UserGameDataResponse.builder().cardsIds(userFavCards
-                .getCardsIds()).userId(userId).build();
+        return UserGameDataResponse.builder().cards((userFavCards
+                .getCards())).userId(userId).build();
     }
 }

@@ -1,38 +1,28 @@
 package com.oscarjimenez.datamanageproject.domain.DTOrequest;
 
+import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
+import com.oscarjimenez.datamanageproject.service.DTO.PuntuationDTO;
+import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
+import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
+import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
+import java.util.UUID;
+
 @Data
 @Builder
 public class GameUserDataRequest {
 
 
-    String userId;
-    String email;
+    UUID userId;
+    DeckDTO favDeck;
+    GetOneCardResponseDTO favCard;
+    DeckReportDTO deckReport;
+    PuntuationDTO puntuation;
+    ResultGameDTO resultGame;
     String cardId;
-    List<String> cardsIds;
-    String deckId;
-    String heroId;
-    int wins;
-    int lost;
-    double averageMana;
-    double avarageAttack;
-    double avarageHealth;
-    double totalAttackToHeroes;
-    double totalAttackToMinions;
-    String userAnnotations;
-    int deckRate;
-    String gameId;
-    int openentDeckSteal;
-    int possibilityToStealCardFromAnotherCard;
-    int posibilityToHealACardFromAnotherCard;
-    int secretsInDeck;
-    int spellsInDeck;
-    int minionsInDeck;
-    int cardsInDeck;
-    int cardsThatCreateOtherCards;
     String cardId2;
     String winnerCardVsCard;
 

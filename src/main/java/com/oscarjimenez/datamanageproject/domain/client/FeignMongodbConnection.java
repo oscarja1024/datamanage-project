@@ -44,4 +44,6 @@ public interface FeignMongodbConnection {
 
     @PostMapping(path="/find")
     UserGameDataResponse findUserGameData(@RequestHeader("apiKey")String apiKey, @RequestBody FindGameUserDataRequest findGameUserDataRequest);
+    @PostMapping(path="/findOne")
+    UserGameDataResponse findUserGameDataOne(@RequestHeader("apiKey")String apiKey, @RequestBody FindGameUserDataRequest findUserGameDataRequest);
 }

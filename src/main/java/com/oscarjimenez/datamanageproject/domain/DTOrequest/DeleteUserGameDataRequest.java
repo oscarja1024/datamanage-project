@@ -1,5 +1,7 @@
 package com.oscarjimenez.datamanageproject.domain.DTOrequest;
 
+import java.util.UUID;
+
 public class DeleteUserGameDataRequest {
 
     String dataSource;
@@ -9,10 +11,10 @@ public class DeleteUserGameDataRequest {
     Filter filter;
 
     public class Filter{
-        String gameId;
+        UUID gameId;
 
-        String userId;
+        UUID userId;
 
-        String deckId;
+        UUID deckId;
     }
 }

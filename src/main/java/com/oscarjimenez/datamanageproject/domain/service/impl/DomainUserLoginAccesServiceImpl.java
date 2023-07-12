@@ -12,7 +12,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DomainUserLoginAccesServiceImpl implements DomainUserLoginAccesService {
+    @Override
+    public UserDataRequest.Document userDataForLogIn(String email) {
+        return null;
+    }
 
+    @Override
+    public DeletedCount deleteUser(UserDataRequest userDataRequest) {
+        return null;
+    }
+    /*
     @Autowired
     FeignMongodbConnection feignMongodbConnection;
 
@@ -27,5 +36,5 @@ public class DomainUserLoginAccesServiceImpl implements DomainUserLoginAccesServ
         return feignMongodbConnection.deleteUserData(utilityDomainClass.getApiKey(),
                 DeleteUserDataRequest.builder().filter(DeleteUserDataRequest.Filter.builder().userId(userDataRequest.getDocument().getId()).build()).build());
 
-    }
+    }*/
 }
