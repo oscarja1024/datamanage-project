@@ -16,7 +16,7 @@ public class UserDataRequest {
 
     @Data
     @Builder
-    public class Document{
+    public static class Document{
         String id;
         String nickName;
         String name;

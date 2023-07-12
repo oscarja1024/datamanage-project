@@ -17,7 +17,7 @@ public class DeleteUserDataRequest {
 
     @Data
     @Builder
-    public class Filter{
+    public static class Filter{
         UUID userId;
 
     }

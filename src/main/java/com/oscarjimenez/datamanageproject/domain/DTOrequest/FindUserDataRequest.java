@@ -17,7 +17,7 @@ public class FindUserDataRequest {
 
     @Data
     @Builder
-    public class Filter{
+    public static class Filter{
         UUID userId;
 
         String email;

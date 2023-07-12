@@ -5,8 +5,12 @@ import com.oscarjimenez.datamanageproject.service.DTO.AttackDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.HealthDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.ManaDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.SortDTO;
+import com.oscarjimenez.datamanageproject.service.DeckFinderDataService;
+import com.oscarjimenez.datamanageproject.service.MetadataFinderService;
+import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.GetCardsResponseDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
+import com.oscarjimenez.dataminerproject.client.DTOS.MetadataResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +25,37 @@ public class MinerDataAccesController {
 
     @Autowired
     private CardDataFinderService cardDataService;
+
+    @Autowired
+    private DeckFinderDataService deckDataService;
+
+    @Autowired
+    private MetadataFinderService metadataFinderService;
+
+    @GetMapping
+    public ResponseEntity<MetadataResponseDTO> getAllMetadata() {
+        MetadataResponseDTO metadata = metadataFinderService.getAllMetada();
+        return ResponseEntity.ok(metadata);
+    }
+
+    @GetMapping("/byCardListAndHero")
+    public ResponseEntity<DeckDTO> getDeckByCardListAndHero(@RequestParam("cardIds") List<String> cardIds,
+                                                            @RequestParam("heroId") String heroId) {
+        DeckDTO deck = deckDataService.getDeckByCardListAndHero(cardIds, heroId);
+        return ResponseEntity.ok(deck);
+    }
+
+    @GetMapping("/byCardListAutoHero")
+    public ResponseEntity<DeckDTO> getDeckByCardListAutoHero(@RequestParam("cardIds") List<String> cardIds) {
+        DeckDTO deck = deckDataService.getDeckByCardListAutoHero(cardIds);
+        return ResponseEntity.ok(deck);
+    }
+
+    @GetMapping("/byCode")
+    public ResponseEntity<DeckDTO> getDeckByCode(@RequestParam("code") String code) {
+        DeckDTO deck = deckDataService.getDeckByCode(code);
+        return ResponseEntity.ok(deck);
+    }
 
     @GetMapping("/{cardId}")
     public ResponseEntity<GetOneCardResponseDTO> getOneCardById(@PathVariable("cardId") String cardId) {

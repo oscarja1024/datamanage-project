@@ -16,7 +16,7 @@ public class FindGameUserDataRequest {
 
     @Data
     @Builder
-    public class Filter{
+    public static class Filter{
         UUID userId;
 
         UUID deckId;

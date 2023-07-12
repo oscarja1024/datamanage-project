@@ -32,15 +32,6 @@ public class UserDataAccesController {
     @Autowired
     private MetadataClasifierService metadataService;
 
-    @Autowired
-    private MetadataFinderService metadataFinderService;
-
-    @GetMapping
-    public ResponseEntity<MetadataResponseDTO> getAllMetadata() {
-        MetadataResponseDTO metadata = metadataFinderService.getAllMetada();
-        return ResponseEntity.ok(metadata);
-    }
-
     @PostMapping("/filter")
     public ResponseEntity<FilteredMetadataResponseDTO> filterMetadata(@RequestBody FilterDTO filters) {
         FilteredMetadataResponseDTO filteredMetadata = metadataService.filterMetadata(filters);
