@@ -36,7 +36,7 @@ public class DeckFinderDataServiceImpl implements DeckFinderDataService {
 
         var params = Map.of("CODE", code);
 
-        var result = feignDataMinerConnection.getDeckByCardListAndHero(MinerDTO.builder().params(params).page("0").build());
+        var result = feignDataMinerConnection.getDeckByCode(MinerDTO.builder().params(params).page("0").build());
 
         return result;
     }

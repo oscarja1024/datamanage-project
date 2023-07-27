@@ -34,18 +34,13 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
     }
 
     @Override
-    public List<GetCardsResponseDTO> getAllCards() {
+    public GetCardsResponseDTO getAllCards(String page) {
 
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).build());
 
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").build()));
-        }
-
-        return result;
+        return resultado;
     }
 
     @Override

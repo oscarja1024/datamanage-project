@@ -7,14 +7,12 @@ import com.oscarjimenez.datamanageproject.service.DTO.SortDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.GetCardsResponseDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
 
-import java.util.List;
-
 public interface CardDataFinderService {
 
 
     GetOneCardResponseDTO getOneCardById(String cardId);
 
-    List<GetCardsResponseDTO> getAllCards();
+    GetCardsResponseDTO getAllCards(String page);
 
     GetCardsResponseDTO getAllCardsSort(SortDTO sort);
 

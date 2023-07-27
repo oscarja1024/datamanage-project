@@ -61,9 +61,9 @@ public class MinerDataAccesController {
         return ResponseEntity.ok(card);
     }
 
-    @GetMapping("cards")
-    public ResponseEntity<List<GetCardsResponseDTO>> getAllCards() {
-        List<GetCardsResponseDTO> cards = cardDataService.getAllCards();
+    @GetMapping("/cards/{page}")
+    public ResponseEntity<GetCardsResponseDTO> getAllCards(@PathVariable String page) {
+        var cards = cardDataService.getAllCards(page);
         return ResponseEntity.ok(cards);
     }
 
