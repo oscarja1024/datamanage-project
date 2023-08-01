@@ -8,6 +8,7 @@ import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
 import com.oscarjimenez.datamanageproject.domain.service.GameUserCardDataService;
 import com.oscarjimenez.datamanageproject.domain.utils.utilityDomainClass;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -16,6 +17,19 @@ import java.util.UUID;
 public class GameUserCardDataServiceImpl implements GameUserCardDataService {
     @Autowired
     private FeignMongodbConnection feignMongodbConnection;
+
+    @Value("{spring.data.mongodb.data-api.collection1}")
+    private String collecton1;
+
+    @Value("{spring.data.mongodb.data-api.collection2}")
+    private String collecton2;
+
+    @Value("{spring.data.mongodb.data-api.dataSource}")
+    private String dataSource;
+
+    @Value("{spring.data.mongodb.data-api.dataBase}")
+    private String dataBase;
+
 
     public InsertedId saveFavCard(UUID userId, String cardId){
         return feignMongodbConnection.insertGameUserData(utilityDomainClass.getApiKey()
