@@ -68,94 +68,94 @@ public class MinerDataAccesController {
     }
 
     @GetMapping("/sort")
-    public ResponseEntity<GetCardsResponseDTO> getAllCardsSort(@RequestParam("sort") String sort) {
+    public ResponseEntity<GetCardsResponseDTO> getAllCardsSort(@RequestParam("sort") String sort, @RequestParam("page") String page) {
         var sortDTO =  SortDTO.builder().sort(sort).build();
-        GetCardsResponseDTO cards = cardDataService.getAllCardsSort(sortDTO);
+        GetCardsResponseDTO cards = cardDataService.getAllCardsSort(sortDTO, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/pageSize")
-    public ResponseEntity<GetCardsResponseDTO> getAllCardsSetPageSize(@RequestParam("pageSize") String pageSize) {
-        GetCardsResponseDTO cards = cardDataService.getAllCardsSetPageSize(pageSize);
+    public ResponseEntity<GetCardsResponseDTO> getAllCardsSetPageSize(@RequestParam("pageSize") String pageSize, @RequestParam("page") String page) {
+        GetCardsResponseDTO cards = cardDataService.getAllCardsSetPageSize(pageSize, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/sortPageSize")
     public ResponseEntity<GetCardsResponseDTO> getAllCardsByPageSetPageSizeSort(@RequestParam("sort") String sort,
-                                                                                @RequestParam("pageSize") String pageSize) {
+                                                                                @RequestParam("pageSize") String pageSize, @RequestParam("page") String page) {
         var sortDTO =  SortDTO.builder().sort(sort).build();
-        GetCardsResponseDTO cards = cardDataService.getAllCardsByPageSetPageSizeSort(sortDTO, pageSize);
+        GetCardsResponseDTO cards = cardDataService.getAllCardsByPageSetPageSizeSort(sortDTO, pageSize, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/mana/{manaCost}")
-    public ResponseEntity<GetCardsResponseDTO> getAllCardsByManaCost(@PathVariable("manaCost") ManaDTO mana) {
-        GetCardsResponseDTO cards = cardDataService.getAllCardsByManaCost(mana);
+    public ResponseEntity<GetCardsResponseDTO> getAllCardsByManaCost(@PathVariable("manaCost") ManaDTO mana, @RequestParam("page") String page) {
+        GetCardsResponseDTO cards = cardDataService.getAllCardsByManaCost(mana, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/mana/{manaCost}/attack/{attack}")
     public ResponseEntity<GetCardsResponseDTO> getAllCardsByManaCostAndAttack(@PathVariable("manaCost") ManaDTO mana,
-                                                                              @PathVariable("attack") AttackDTO attack) {
-        GetCardsResponseDTO cards = cardDataService.getAllCardsByManaCostAndAttack(mana, attack);
+                                                                              @PathVariable("attack") AttackDTO attack , @RequestParam("page") String page) {
+        GetCardsResponseDTO cards = cardDataService.getAllCardsByManaCostAndAttack(mana, attack, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/attack/{attack}")
-    public ResponseEntity<GetCardsResponseDTO> getAllCardsByAttack(@PathVariable("attack") AttackDTO attack) {
-        GetCardsResponseDTO cards = cardDataService.getAllCardsByAttack(attack);
+    public ResponseEntity<GetCardsResponseDTO> getAllCardsByAttack(@PathVariable("attack") AttackDTO attack, @RequestParam("page") String page) {
+        GetCardsResponseDTO cards = cardDataService.getAllCardsByAttack(attack, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/type/{cardType}")
-    public ResponseEntity<GetCardsResponseDTO> getAllCardsByType(@PathVariable("cardType") String cardType) {
-        GetCardsResponseDTO cards = cardDataService.getAllCardsByType(cardType);
+    public ResponseEntity<GetCardsResponseDTO> getAllCardsByType(@PathVariable("cardType") String cardType, @RequestParam("page") String page) {
+        GetCardsResponseDTO cards = cardDataService.getAllCardsByType(cardType, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/type/{cardType}/attack/{attack}")
     public ResponseEntity<GetCardsResponseDTO> getAllCardsByTypeAndAttack(@PathVariable("cardType") String cardType,
-                                                                          @PathVariable("attack") AttackDTO attack) {
-        GetCardsResponseDTO cards = cardDataService.getAllCardsByTypeAndAttack(cardType, attack);
+                                                                          @PathVariable("attack") AttackDTO attack, @RequestParam("page") String page) {
+        GetCardsResponseDTO cards = cardDataService.getAllCardsByTypeAndAttack(cardType, attack, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/type/{cardType}/mana/{manaCost}")
     public ResponseEntity<GetCardsResponseDTO> getAllCardsByTypeAndManaCost(@PathVariable("cardType") String cardType,
-                                                                            @PathVariable("manaCost") ManaDTO mana) {
-        GetCardsResponseDTO cards = cardDataService.getAllCardsByTypeAndManaCost(cardType, mana);
+                                                                            @PathVariable("manaCost") ManaDTO mana, @RequestParam("page") String page) {
+        GetCardsResponseDTO cards = cardDataService.getAllCardsByTypeAndManaCost(cardType, mana, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/type/{cardType}/mana/{manaCost}/attack/{attack}")
     public ResponseEntity<GetCardsResponseDTO> getAllCardsByTypeAndAttackAndManaCost(@PathVariable("cardType") String cardType,
                                                                                      @PathVariable("manaCost") ManaDTO mana,
-                                                                                     @PathVariable("attack") AttackDTO attack) {
-        GetCardsResponseDTO cards = cardDataService.getAllCardsByTypeAndAttackAndManaCost(cardType, mana, attack);
+                                                                                     @PathVariable("attack") AttackDTO attack, @RequestParam("page") String page) {
+        GetCardsResponseDTO cards = cardDataService.getAllCardsByTypeAndAttackAndManaCost(cardType, mana, attack, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/health/{health}")
-    public ResponseEntity<GetCardsResponseDTO> getAllCardsByHealth(@PathVariable("health") HealthDTO health) {
-        GetCardsResponseDTO cards = cardDataService.getAllCardsByHealth(health);
+    public ResponseEntity<GetCardsResponseDTO> getAllCardsByHealth(@PathVariable("health") HealthDTO health, @RequestParam("page") String page) {
+        GetCardsResponseDTO cards = cardDataService.getAllCardsByHealth(health, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/gameMode/{gameMode}")
-    public ResponseEntity<GetCardsResponseDTO> getAllCardsByGameMode(@PathVariable("gameMode") String gameMode) {
-        GetCardsResponseDTO cards = cardDataService.getAllCardsByGameMode(gameMode);
+    public ResponseEntity<GetCardsResponseDTO> getAllCardsByGameMode(@PathVariable("gameMode") String gameMode, @RequestParam("page") String page) {
+        GetCardsResponseDTO cards = cardDataService.getAllCardsByGameMode(gameMode, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/spellSchool/{spellSchool}")
-    public ResponseEntity<GetCardsResponseDTO> getAllCardsBySpellSchool(@PathVariable("spellSchool") String spellSchool) {
-        GetCardsResponseDTO cards = cardDataService.getAllCardsBySpellSchool(spellSchool);
+    public ResponseEntity<GetCardsResponseDTO> getAllCardsBySpellSchool(@PathVariable("spellSchool") String spellSchool, @RequestParam("page") String page) {
+        GetCardsResponseDTO cards = cardDataService.getAllCardsBySpellSchool(spellSchool, page);
         return ResponseEntity.ok(cards);
     }
 
     @GetMapping("/cardSet/{cardSet}")
-    public ResponseEntity<GetCardsResponseDTO> getAllCardsBySet(@PathVariable("cardSet") String cardSet) {
-        GetCardsResponseDTO cards = cardDataService.getAllCardsBySet(cardSet);
+    public ResponseEntity<GetCardsResponseDTO> getAllCardsBySet(@PathVariable("cardSet") String cardSet, @RequestParam("page") String page) {
+        GetCardsResponseDTO cards = cardDataService.getAllCardsBySet(cardSet, page);
         return ResponseEntity.ok(cards);
     }
 }

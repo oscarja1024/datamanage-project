@@ -48,10 +48,11 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
 
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("SORT",sort.getSort());
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).build());
+        result.add(resultado);
+
 
 
 
@@ -63,212 +64,163 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
 
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("PAGE_SIZE",pageSize);
 
         var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
-
+        result.add(resultado);
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsByPageSetPageSizeSort(SortDTO sort, String pageSize) {
+    public GetCardsResponseDTO getAllCardsByPageSetPageSizeSort(SortDTO sort, String pageSize, String page) {
 
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("SORT",sort.getSort());
         params.put("PAGE_SIZE",pageSize);
-
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        result.add(resultado);
 
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsByManaCost(ManaDTO mana) {
+    public GetCardsResponseDTO getAllCardsByManaCost(ManaDTO mana, String page) {
 
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("MANA", mana.getManaCost());
-
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).build());
+        result.add(resultado);
 
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsByManaCostAndAttack(ManaDTO mana, AttackDTO attack) {
+    public GetCardsResponseDTO getAllCardsByManaCostAndAttack(ManaDTO mana, AttackDTO attack, String page) {
 
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("MANA", mana.getManaCost());
         params.put("ATTACK", attack.getAttack());
-
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).build());
+        result.add(resultado);
 
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsByAttack(AttackDTO attack) {
+    public GetCardsResponseDTO getAllCardsByAttack(AttackDTO attack, String page) {
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("ATTACK", attack.getAttack());
-
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).build());
+        result.add(resultado);
 
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsByType(String cardType) {
+    public GetCardsResponseDTO getAllCardsByType(String cardType, String page) {
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("CARD_TYPE",cardType);
-
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        result.add(resultado);
 
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsByTypeAndAttack(String cardType, AttackDTO attack) {
+    public GetCardsResponseDTO getAllCardsByTypeAndAttack(String cardType, AttackDTO attack, String page) {
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("CARD_TYPE",cardType);
         params.put("ATTACK", attack.getAttack());
-
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        result.add(resultado);
 
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsByTypeAndManaCost(String cardType,ManaDTO mana) {
+    public GetCardsResponseDTO getAllCardsByTypeAndManaCost(String cardType,ManaDTO mana, String page) {
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("CARD_TYPE",cardType);
         params.put("MANA", mana.getManaCost());
-
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        result.add(resultado);
 
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsByTypeAndAttackAndManaCost(String cardType,ManaDTO mana,AttackDTO attack) {
+    public GetCardsResponseDTO getAllCardsByTypeAndAttackAndManaCost(String cardType,ManaDTO mana,AttackDTO attack, String page) {
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("CARD_TYPE",cardType);
         params.put("MANA", mana.getManaCost());
         params.put("ATTACK", attack.getAttack());
-
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        result.add(resultado);
 
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsByHealth(HealthDTO health) {
+    public GetCardsResponseDTO getAllCardsByHealth(HealthDTO health, String page) {
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("HEALTH",health.getHealth());
-
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        result.add(resultado);
 
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsByGameMode(String gameMode) {
+    public GetCardsResponseDTO getAllCardsByGameMode(String gameMode, String page) {
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("GAME_MODE",gameMode);
-
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        result.add(resultado);
 
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsBySpellSchool(String spellSchool) {
+    public GetCardsResponseDTO getAllCardsBySpellSchool(String spellSchool, String page) {
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("SPELL_SCHOOL",spellSchool);
-
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        result.add(resultado);
 
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsBySet(String cardSet) {
+    public GetCardsResponseDTO getAllCardsBySet(String cardSet, String page) {
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
-        result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("CARD_SET",cardSet);
-
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        result.add(resultado);
 
         return resultado;
     }

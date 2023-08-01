@@ -14,31 +14,31 @@ public interface CardDataFinderService {
 
     GetCardsResponseDTO getAllCards(String page);
 
-    GetCardsResponseDTO getAllCardsSort(SortDTO sort);
+    GetCardsResponseDTO getAllCardsSort(SortDTO sort, String page);
 
-    GetCardsResponseDTO getAllCardsSetPageSize(String pageSize);
+    GetCardsResponseDTO getAllCardsSetPageSize(String pageSize, String page);
 
-    GetCardsResponseDTO getAllCardsByPageSetPageSizeSort(SortDTO sort, String pageSize);
+    GetCardsResponseDTO getAllCardsByPageSetPageSizeSort(SortDTO sort, String pageSize, String page);
 
-    GetCardsResponseDTO getAllCardsByManaCost(ManaDTO mana);
+    GetCardsResponseDTO getAllCardsByManaCost(ManaDTO mana, String page);
 
-    GetCardsResponseDTO getAllCardsByManaCostAndAttack(ManaDTO mana, AttackDTO attack);
+    GetCardsResponseDTO getAllCardsByManaCostAndAttack(ManaDTO mana, AttackDTO attack, String page);
 
-    GetCardsResponseDTO getAllCardsByAttack(AttackDTO attack);
+    GetCardsResponseDTO getAllCardsByAttack(AttackDTO attack, String page);
 
-    GetCardsResponseDTO getAllCardsByType(String cardType);
+    GetCardsResponseDTO getAllCardsByType(String cardType, String page);
 
-    GetCardsResponseDTO getAllCardsByTypeAndAttack(String cardType, AttackDTO attack);
+    GetCardsResponseDTO getAllCardsByTypeAndAttack(String cardType, AttackDTO attack, String page);
 
-    GetCardsResponseDTO getAllCardsByTypeAndManaCost(String cardType,ManaDTO mana);
+    GetCardsResponseDTO getAllCardsByTypeAndManaCost(String cardType,ManaDTO mana, String page);
 
-    GetCardsResponseDTO getAllCardsByTypeAndAttackAndManaCost(String cardType,ManaDTO mana,AttackDTO attack);
+    GetCardsResponseDTO getAllCardsByTypeAndAttackAndManaCost(String cardType,ManaDTO mana,AttackDTO attack, String page);
 
-    GetCardsResponseDTO getAllCardsByHealth(HealthDTO health);
+    GetCardsResponseDTO getAllCardsByHealth(HealthDTO health, String page);
 
-    GetCardsResponseDTO getAllCardsByGameMode(String gameMode);
+    GetCardsResponseDTO getAllCardsByGameMode(String gameMode, String page);
 
-    GetCardsResponseDTO getAllCardsBySpellSchool(String spellSchool);
+    GetCardsResponseDTO getAllCardsBySpellSchool(String spellSchool, String page);
 
-    GetCardsResponseDTO getAllCardsBySet(String cardSet);
+    GetCardsResponseDTO getAllCardsBySet(String cardSet, String page);
 }
