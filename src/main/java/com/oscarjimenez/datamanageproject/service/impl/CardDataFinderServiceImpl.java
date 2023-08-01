@@ -44,35 +44,30 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsSort(SortDTO sort) {
+    public GetCardsResponseDTO getAllCardsSort(SortDTO sort, String page) {
 
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).build());
         result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("SORT",sort.getSort());
 
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+
 
         return resultado;
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsSetPageSize(String pageSize) {
+    public GetCardsResponseDTO getAllCardsSetPageSize(String pageSize,String page) {
 
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page("0").build());
         result.add(resultado);
         Map<String,String> params = new HashMap<>();
         params.put("PAGE_SIZE",pageSize);
 
-        for (int i = resultado.getPageCount();i>=0;i--){
-            result.add( feignDataMinerConnection.getAllCards(MinerDTO.builder().page(i+"").params(params).build()));
-        }
+        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
 
         return resultado;
     }

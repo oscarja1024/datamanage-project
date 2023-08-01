@@ -49,7 +49,7 @@ public class CardDataClasifierServiceImpl implements CardDataClasifierService {
         try {
             gameUserCardDataService.saveFavCard(userId,cardID);
         } catch (Exception e){
-            throw new Exception("Por un problema interno no se ha podido guardar la carta de manera satisfactoriaa",e);
+            throw new Exception("Por un problema interno no se ha podido guardar la carta de manera satisfactoriamente",e);
         }
 
         return true;
