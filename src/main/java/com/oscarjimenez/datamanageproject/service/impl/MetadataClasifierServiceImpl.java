@@ -1,12 +1,10 @@
 package com.oscarjimenez.datamanageproject.service.impl;
 
+import com.oscarjimenez.datamanageproject.client.DTOS.MetadataResponseDTO;
 import com.oscarjimenez.datamanageproject.client.FeignDataMinerConnection;
 import com.oscarjimenez.datamanageproject.service.DTO.FilterDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.FilteredMetadataResponseDTO;
 import com.oscarjimenez.datamanageproject.service.MetadataClasifierService;
-import com.oscarjimenez.dataminerproject.client.DTOS.MetadataResponseDTO;
-import feign.FeignException;
-import feign.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

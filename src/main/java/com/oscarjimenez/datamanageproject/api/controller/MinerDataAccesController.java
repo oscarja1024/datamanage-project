@@ -1,5 +1,9 @@
 package com.oscarjimenez.datamanageproject.api.controller;
 
+import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.GetCardsResponseDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.GetOneCardResponseDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.MetadataResponseDTO;
 import com.oscarjimenez.datamanageproject.service.CardDataFinderService;
 import com.oscarjimenez.datamanageproject.service.DTO.AttackDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.HealthDTO;
@@ -7,10 +11,6 @@ import com.oscarjimenez.datamanageproject.service.DTO.ManaDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.SortDTO;
 import com.oscarjimenez.datamanageproject.service.DeckFinderDataService;
 import com.oscarjimenez.datamanageproject.service.MetadataFinderService;
-import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.GetCardsResponseDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.MetadataResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

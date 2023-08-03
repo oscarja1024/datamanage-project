@@ -1,10 +1,7 @@
 package com.oscarjimenez.datamanageproject.client;
 
-import com.oscarjimenez.dataminerproject.api.DTOS.ControllerDTO.MinerDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.GetCardsResponseDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.MetadataResponseDTO;
+
+import com.oscarjimenez.datamanageproject.client.DTOS.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

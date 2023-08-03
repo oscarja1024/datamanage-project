@@ -9,8 +9,8 @@ import com.oscarjimenez.datamanageproject.domain.DTOresponse.UserGameDataRespons
 import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
 import com.oscarjimenez.datamanageproject.domain.service.GameUserDeckDataService;
 import com.oscarjimenez.datamanageproject.domain.utils.utilityDomainClass;
-import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.HeroDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.HeroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

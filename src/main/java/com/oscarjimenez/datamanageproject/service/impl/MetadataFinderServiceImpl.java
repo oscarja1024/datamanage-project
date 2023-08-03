@@ -2,7 +2,7 @@ package com.oscarjimenez.datamanageproject.service.impl;
 
 import com.oscarjimenez.datamanageproject.client.FeignDataMinerConnection;
 import com.oscarjimenez.datamanageproject.service.MetadataFinderService;
-import com.oscarjimenez.dataminerproject.client.DTOS.MetadataResponseDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.MetadataResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

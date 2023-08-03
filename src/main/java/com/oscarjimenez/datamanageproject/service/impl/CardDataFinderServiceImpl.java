@@ -1,14 +1,14 @@
 package com.oscarjimenez.datamanageproject.service.impl;
 
+import com.oscarjimenez.datamanageproject.client.DTOS.GetCardsResponseDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.GetOneCardResponseDTO;
 import com.oscarjimenez.datamanageproject.client.FeignDataMinerConnection;
 import com.oscarjimenez.datamanageproject.service.CardDataFinderService;
 import com.oscarjimenez.datamanageproject.service.DTO.AttackDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.HealthDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.ManaDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.SortDTO;
-import com.oscarjimenez.dataminerproject.api.DTOS.ControllerDTO.MinerDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.GetCardsResponseDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.MinerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +60,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsSetPageSize(String pageSize,String page) {
+    public GetCardsResponseDTO getAllCardsSetPageSize(String pageSize, String page) {
 
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
@@ -151,7 +151,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
     }
 
     @Override
-    public GetCardsResponseDTO getAllCardsByTypeAndManaCost(String cardType,ManaDTO mana, String page) {
+    public GetCardsResponseDTO getAllCardsByTypeAndManaCost(String cardType, ManaDTO mana, String page) {
         List<GetCardsResponseDTO> result = new ArrayList<>();
 
         Map<String,String> params = new HashMap<>();

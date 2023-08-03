@@ -1,6 +1,7 @@
 package com.oscarjimenez.datamanageproject.service;
 
-import com.oscarjimenez.dataminerproject.client.DTOS.MetadataResponseDTO;
+
+import com.oscarjimenez.datamanageproject.client.DTOS.MetadataResponseDTO;
 
 public interface MetadataFinderService {
 

@@ -3,8 +3,8 @@ package com.oscarjimenez.datamanageproject.domain.DTOrequest;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.PuntuationDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.GetOneCardResponseDTO;
 import lombok.Builder;
 import lombok.Data;
 

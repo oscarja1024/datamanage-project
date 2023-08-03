@@ -1,11 +1,12 @@
 package com.oscarjimenez.datamanageproject.service;
 
+import com.oscarjimenez.datamanageproject.client.DTOS.GetCardsResponseDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.AttackDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.HealthDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.ManaDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.SortDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.GetCardsResponseDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.GetOneCardResponseDTO;
+
 
 public interface CardDataFinderService {
 
@@ -30,7 +31,7 @@ public interface CardDataFinderService {
 
     GetCardsResponseDTO getAllCardsByTypeAndAttack(String cardType, AttackDTO attack, String page);
 
-    GetCardsResponseDTO getAllCardsByTypeAndManaCost(String cardType,ManaDTO mana, String page);
+    GetCardsResponseDTO getAllCardsByTypeAndManaCost(String cardType, ManaDTO mana, String page);
 
     GetCardsResponseDTO getAllCardsByTypeAndAttackAndManaCost(String cardType,ManaDTO mana,AttackDTO attack, String page);
 

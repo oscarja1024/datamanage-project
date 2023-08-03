@@ -1,7 +1,7 @@
 package com.oscarjimenez.datamanageproject.service;
 
-import com.oscarjimenez.dataminerproject.api.DTOS.ControllerDTO.MinerDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
+
+import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
 
 import java.util.List;
 

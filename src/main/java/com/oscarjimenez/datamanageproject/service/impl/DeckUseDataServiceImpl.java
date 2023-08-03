@@ -1,6 +1,8 @@
 package com.oscarjimenez.datamanageproject.service.impl;
 
 import com.oscarjimenez.datamanageproject.api.utils.constants;
+import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.GetOneCardResponseDTO;
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.FindGameUserDataRequest;
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.GameUserDataRequest;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
@@ -9,8 +11,6 @@ import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.PuntuationDTO;
 import com.oscarjimenez.datamanageproject.service.DeckUserDataService;
-import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

@@ -1,6 +1,5 @@
-package com.oscarjimenez.datamanageproject.service.DTO;
+package com.oscarjimenez.datamanageproject.client.DTOS;
 
-import com.oscarjimenez.datamanageproject.client.DTOS.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
@@ -10,7 +9,7 @@ import java.util.List;
 @Data
 @Jacksonized
 @Builder
-public class FilteredMetadataResponseDTO {
+public class MetadataResponseDTO {
 
     private List<SetDTO> sets;
     private List<SetGroupsDTO> setGroups;

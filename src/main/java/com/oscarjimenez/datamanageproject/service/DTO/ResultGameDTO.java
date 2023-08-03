@@ -1,6 +1,6 @@
 package com.oscarjimenez.datamanageproject.service.DTO;
 
-import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
+import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
