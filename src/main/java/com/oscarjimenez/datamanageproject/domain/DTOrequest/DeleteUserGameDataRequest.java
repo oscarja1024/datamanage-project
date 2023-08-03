@@ -1,7 +1,12 @@
 package com.oscarjimenez.datamanageproject.domain.DTOrequest;
 
+import lombok.Builder;
+import lombok.Data;
+
 import java.util.UUID;
 
+@Data
+@Builder
 public class DeleteUserGameDataRequest {
 
     String dataSource;
@@ -10,11 +15,15 @@ public class DeleteUserGameDataRequest {
 
     Filter filter;
 
-    public class Filter{
+    @Data
+    @Builder
+    public static class Filter{
         UUID gameId;
 
         UUID userId;
 
         UUID deckId;
+
+        String cardId;
     }
 }

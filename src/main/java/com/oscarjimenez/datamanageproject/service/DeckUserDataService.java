@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface DeckUserDataService {
 
 
-    DeckDTO findByUserIdandDeckId(UUID userId, String deckId);
+    DeckDTO findByUserIdandDeckId(UUID userId, UUID deckId);
 
     boolean saveOwnedDeck(DeckDTO deckDTO);
 
@@ -19,7 +19,7 @@ public interface DeckUserDataService {
 
     DeckReportDTO getDeckReport(String deckReportId, String deckId, String userId);
 
-    boolean generateDeckResport(String deckId, UUID userId);
+    boolean generateDeckResport(UUID deckId, UUID userId);
 
     DeletedCount deleteDeckReport();
 

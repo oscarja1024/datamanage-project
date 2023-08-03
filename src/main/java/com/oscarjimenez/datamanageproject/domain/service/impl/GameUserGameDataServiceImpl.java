@@ -34,6 +34,6 @@ public class GameUserGameDataServiceImpl implements GameUserGameDataService {
 
     @Override
     public DeletedCount deleteGameData(UUID gameId, UUID userId){
-        return feignMongodbConnection.deleteGameUserData(utilityDomainClass.getApiKey(), DeleteUserGameDataRequest.builder().filter(DeleteUserGameDataRequest.Filter.builder().userId(userId).gameId(gameId).build()).Build());
+        return feignMongodbConnection.deleteGameUserData(utilityDomainClass.getApiKey(), DeleteUserGameDataRequest.builder().filter(DeleteUserGameDataRequest.Filter.builder().userId(userId).gameId(gameId).build()).build());
     }
 }

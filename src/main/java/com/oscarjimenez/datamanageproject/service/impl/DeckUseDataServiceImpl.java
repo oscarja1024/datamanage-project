@@ -27,7 +27,7 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
     private String apiKey;
 
     @Override
-    public DeckDTO findByUserIdandDeckId(UUID userId, String deckId) {
+    public DeckDTO findByUserIdandDeckId(UUID userId, UUID deckId) {
 
         var deckCardListByUser = feignMongodbConnection.findUserGameData(apiKey, FindGameUserDataRequest.builder().build());
 
@@ -66,7 +66,7 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
     }
 
     @Override
-    public boolean generateDeckResport(String deckId, UUID userId) {
+    public boolean generateDeckResport(UUID deckId, UUID userId) {
 
         var ownedDeck = this.findByUserIdandDeckId(userId,deckId);
 
@@ -84,7 +84,7 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
                 .healMean(this.calculateMean(ownedDeck.getCards(), constants.HEAL))
                 .build(); // Se puede mejorar recorriendo solo una vez la lista
 
-        var insertedID = feignMongodbConnection.insertGameUserData(apiKey, GameUserDataRequest.builder().userId(userId).deckReport(deckReport).build());
+        var insertedID = feignMongodbConnection.insertGameUserData(apiKey, (List<GameUserDataRequest>) GameUserDataRequest.builder().document(GameUserDataRequest.Document.builder().userId(userId).deckId(deckId).build()));
 
         return insertedID.toString().isEmpty() || insertedID.toString().isBlank();
     }

@@ -23,7 +23,7 @@ public class GameUserDeckDataServiceImpl implements GameUserDeckDataService {
     private FeignMongodbConnection feignMongodbConnection;
     public InsertedId insertOwnedDeck(List<String> cardIds, String heroId,UUID userId,UUID deckId){
         return  feignMongodbConnection.insertGameUserData(utilityDomainClass.getApiKey(), GameUserDataRequest.builder()
-                .userId(userId).favDeck(DeckDTO.builder().hero(HeroDTO.builder().id(heroId).build()).cardsIds(cardIds).build()).build());
+                .document(GameUserDataRequest.Document.builder().userId(userId).favDeck(DeckDTO.builder().hero(HeroDTO.builder().id(heroId).build()).cardsIds(cardIds).build()).build()).build());
     }
 
     public UserGameDataResponse getOwnedDeck(UUID deckId, UUID userId){
@@ -46,13 +46,12 @@ public class GameUserDeckDataServiceImpl implements GameUserDeckDataService {
 
     @Override
     public DeletedCount deleteDeckDataReport(UUID deckId, UUID deckReportId, UUID userId) {
-        return feignMongodbConnection.deleteGameUserData(utilityDomainClass.getApiKey(), DeleteUserGameDataRequest.builder().filter(DeleteUserGameDataRequest.Filter.builder().userId(userId).deckId(deckId).build()).Build());
-        ;
+        return feignMongodbConnection.deleteGameUserData(utilityDomainClass.getApiKey(), DeleteUserGameDataRequest.builder().filter(DeleteUserGameDataRequest.Filter.builder().userId(userId).deckId(deckId).build()).build());
     }
 
     @Override
     public DeletedCount deleteOwnedDeck(UUID deckId, UUID userId) {
-        return feignMongodbConnection.deleteGameUserData(utilityDomainClass.getApiKey(), DeleteUserGameDataRequest.builder().filter(DeleteUserGameDataRequest.Filter.builder().userId(userId).deckId(deckId).build()).Build());
+        return feignMongodbConnection.deleteGameUserData(utilityDomainClass.getApiKey(), DeleteUserGameDataRequest.builder().filter(DeleteUserGameDataRequest.Filter.builder().userId(userId).deckId(deckId).build()).build());
     }
 
 

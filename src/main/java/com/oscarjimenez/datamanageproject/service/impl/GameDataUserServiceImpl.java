@@ -25,7 +25,7 @@ public class GameDataUserServiceImpl implements GameDataUserService {
     @Override
     public InsertedId saveGameReport(ResultGameDTO gameReport, UUID userId) {
 
-        return gameUserGameDataService.saveGameData(GameUserDataRequest.builder().resultGame(gameReport).userId(userId).build());
+        return gameUserGameDataService.saveGameData(GameUserDataRequest.builder().document(GameUserDataRequest.Document.builder().resultGame(gameReport).userId(userId).build()).build());
     }
 
     @Override

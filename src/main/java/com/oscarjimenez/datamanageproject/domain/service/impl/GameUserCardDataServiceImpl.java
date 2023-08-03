@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.print.Doc;
 import java.util.UUID;
 
 @Service
@@ -35,12 +36,12 @@ public class GameUserCardDataServiceImpl implements GameUserCardDataService {
 
     public InsertedId saveFavCard(UUID userId, String cardId){
         return feignMongodbConnection.insertGameUserData(utilityDomainClass.getApiKey()
-                , GameUserDataRequest.builder().userId(userId).cardId(cardId).build());
+                , GameUserDataRequest.builder().document(GameUserDataRequest.Document.builder().userId(userId).cardId(cardId).build()).build());
     }
 
     public InsertedId saveResultCardVsCard(UUID userId, String cardId1, String cardId2, String winnerId){
         return  feignMongodbConnection.insertGameUserData(utilityDomainClass.getApiKey()
-                , GameUserDataRequest.builder().userId(userId).cardId(cardId1).cardId2(cardId2).winnerCardVsCard(winnerId).build());
+                , GameUserDataRequest.builder().document(GameUserDataRequest.Document.builder().userId(userId).cardId(cardId1).cardId2(cardId2).winnerCardVsCard(winnerId).build()).build());
     }
 
     public UserGameDataResponse getFavCards(UUID userId){
@@ -54,6 +55,6 @@ public class GameUserCardDataServiceImpl implements GameUserCardDataService {
 
     @Override
     public DeletedCount deleteFavCard(UUID userId, String cardId){
-        return feignMongodbConnection.deleteGameUserData(utilityDomainClass.getApiKey(), DeleteUserGameDataRequest.builder().filter(DeleteUserGameDataRequest.Filter.builder().userId(userId).cardId(cardId).build()).Build());;
+        return feignMongodbConnection.deleteGameUserData(utilityDomainClass.getApiKey(), DeleteUserGameDataRequest.builder().filter(DeleteUserGameDataRequest.Filter.builder().userId(userId).cardId(cardId).build()).build());
     }
 }

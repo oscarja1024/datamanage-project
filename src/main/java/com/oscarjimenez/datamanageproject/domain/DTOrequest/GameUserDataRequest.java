@@ -26,6 +26,7 @@ public class GameUserDataRequest {
     public static class Document{
         UUID userId;
         DeckDTO favDeck;
+        UUID deckId;
         GetOneCardResponseDTO favCard;
         DeckReportDTO deckReport;
         PuntuationDTO puntuation;
