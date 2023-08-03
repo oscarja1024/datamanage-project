@@ -119,25 +119,25 @@ public class UserDataAccesController {
     @DeleteMapping("/deleteFavCatd/{cardId}/{userId}")
     public ResponseEntity<DeletedCount> deleteFavCard(@PathVariable String cardId, @PathVariable UUID userId){
         var response = cardService.deleteFavoriteCards(cardId, userId);
-        return new ResponseEntity<>(response, HttpStatus.OK)
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteGameReport/{gameId}/{userId}")
     public ResponseEntity<DeletedCount> deleteGameReport(@PathVariable UUID gameId, @PathVariable UUID userId){
         var response = gameDataService.deleteGameReport(gameId, userId);
-        return new ResponseEntity<>(response, HttpStatus.OK)
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteOwnedDeck/{deckId}/{userId}")
     public ResponseEntity<DeletedCount> deleteOwnedDeck(@PathVariable UUID deckId, @PathVariable UUID userId){
         var response = gameUserDeckDataService.deleteOwnedDeck(deckId, userId);
-        return new ResponseEntity<>(response, HttpStatus.OK)
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteDeckReport/{deckId}/{deckReportId}/{userId}")
     public ResponseEntity<DeletedCount> deleteDeckReport(@PathVariable UUID deckId, @PathVariable  UUID deckReportId,@PathVariable UUID userId){
         var response = gameUserDeckDataService.deleteDeckDataReport(deckId, deckReportId , userId);
-        return new ResponseEntity<>(response, HttpStatus.OK)
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }
