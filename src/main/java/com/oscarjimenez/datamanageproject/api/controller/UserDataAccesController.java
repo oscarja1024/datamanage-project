@@ -1,12 +1,14 @@
 package com.oscarjimenez.datamanageproject.api.controller;
 
+import com.oscarjimenez.datamanageproject.api.DTO.InsertDeckRequest;
+import com.oscarjimenez.datamanageproject.domain.DTOrequest.GameUserDataRequest;
+import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.InsertedId;
-import com.oscarjimenez.datamanageproject.domain.service.GameUserCardDataService;
+import com.oscarjimenez.datamanageproject.domain.DTOresponse.UserGameDataResponse;
+import com.oscarjimenez.datamanageproject.domain.service.GameUserDeckDataService;
 import com.oscarjimenez.datamanageproject.service.*;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultCardDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.MetadataResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import com.oscarjimenez.datamanageproject.service.DTO.FilteredMetadataResponseDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.FilterDTO;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -32,6 +33,9 @@ public class UserDataAccesController {
 
     @Autowired
     private MetadataClasifierService metadataService;
+
+    @Autowired
+    private GameUserDeckDataService gameUserDeckDataService;
 
     @PostMapping("/filter")
     public ResponseEntity<FilteredMetadataResponseDTO> filterMetadata(@RequestBody FilterDTO filters) {
@@ -51,25 +55,6 @@ public class UserDataAccesController {
                                                      @RequestParam("userId") UUID userId) {
         InsertedId savedId = gameDataService.saveGameReport(gameReport, userId);
         return ResponseEntity.ok(savedId);
-    }
-
-    @GetMapping("/by-card-list-and-hero")
-    public ResponseEntity<DeckDTO> getDeckByCardListAndHero(@RequestParam("cardIds") List<String> cardIds,
-                                                            @RequestParam("heroId") String heroId) {
-        DeckDTO result = deckService.getDeckByCardListAndHero(cardIds, heroId);
-        return ResponseEntity.ok(result);
-    }
-
-    @GetMapping("/by-card-list-auto-hero")
-    public ResponseEntity<DeckDTO> getDeckByCardListAutoHero(@RequestParam("cardIds") List<String> cardIds) {
-        DeckDTO result = deckService.getDeckByCardListAutoHero(cardIds);
-        return ResponseEntity.ok(result);
-    }
-
-    @GetMapping("/by-code")
-    public ResponseEntity<DeckDTO> getDeckByCode(@RequestParam("code") String code) {
-        DeckDTO result = deckService.getDeckByCode(code);
-        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/compare/{cardId1}/{cardId2}")
@@ -94,5 +79,66 @@ public class UserDataAccesController {
                     .body("An internal server error occurred: " + e.getMessage());
         }
     }
+
+
+    @PostMapping("/insert")
+    public ResponseEntity<InsertedId> insertOwnedDeck(@RequestBody InsertDeckRequest request) {
+        InsertedId insertedId = gameUserDeckDataService.insertOwnedDeck(
+                request.getCardIds(),
+                request.getHeroId(),
+                request.getUserId(),
+                request.getDeckId()
+        );
+        return new ResponseEntity<>(insertedId, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get/{deckId}/{userId}")
+    public ResponseEntity<UserGameDataResponse> getOwnedDeck(
+            @PathVariable UUID deckId,
+            @PathVariable UUID userId
+    ) {
+        UserGameDataResponse response = gameUserDeckDataService.getOwnedDeck(deckId, userId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/insertReport")
+    public ResponseEntity<InsertedId> insertDeckReport(@RequestBody GameUserDataRequest request) {
+        InsertedId insertedId = gameUserDeckDataService.insertDeckReport(request);
+        return new ResponseEntity<>(insertedId, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getReport/{deckId}/{userId}")
+    public ResponseEntity<UserGameDataResponse> getDeckDataReport(
+            @PathVariable UUID deckId,
+            @PathVariable UUID userId
+    ) {
+        UserGameDataResponse response = gameUserDeckDataService.getDeckDataReport(deckId, userId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteFavCatd/{cardId}/{userId}")
+    public ResponseEntity<DeletedCount> deleteFavCard(@PathVariable String cardId, @PathVariable UUID userId){
+        var response = cardService.deleteFavoriteCards(cardId, userId);
+        return new ResponseEntity<>(response, HttpStatus.OK)
+    }
+
+    @DeleteMapping("/deleteGameReport/{gameId}/{userId}")
+    public ResponseEntity<DeletedCount> deleteGameReport(@PathVariable UUID gameId, @PathVariable UUID userId){
+        var response = gameDataService.deleteGameReport(gameId, userId);
+        return new ResponseEntity<>(response, HttpStatus.OK)
+    }
+
+    @DeleteMapping("/deleteOwnedDeck/{deckId}/{userId}")
+    public ResponseEntity<DeletedCount> deleteOwnedDeck(@PathVariable UUID deckId, @PathVariable UUID userId){
+        var response = gameUserDeckDataService.deleteOwnedDeck(deckId, userId);
+        return new ResponseEntity<>(response, HttpStatus.OK)
+    }
+
+    @DeleteMapping("/deleteDeckReport/{deckId}/{deckReportId}/{userId}")
+    public ResponseEntity<DeletedCount> deleteDeckReport(@PathVariable UUID deckId, @PathVariable  UUID deckReportId,@PathVariable UUID userId){
+        var response = gameUserDeckDataService.deleteDeckDataReport(deckId, deckReportId , userId);
+        return new ResponseEntity<>(response, HttpStatus.OK)
+    }
+
 }
 

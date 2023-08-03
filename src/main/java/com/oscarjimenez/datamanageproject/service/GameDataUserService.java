@@ -1,5 +1,6 @@
 package com.oscarjimenez.datamanageproject.service;
 
+import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.InsertedId;
 import com.oscarjimenez.datamanageproject.service.DTO.*;
 
@@ -12,4 +13,5 @@ public interface GameDataUserService {
 
     InsertedId saveGameReport(ResultGameDTO gameReport, UUID userId);
 
+    DeletedCount deleteGameReport(UUID gameId, UUID userId);
 }

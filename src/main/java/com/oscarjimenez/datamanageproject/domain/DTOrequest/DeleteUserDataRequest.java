@@ -20,5 +20,13 @@ public class DeleteUserDataRequest {
     public static class Filter{
         UUID userId;
 
+        UUID deckId;
+
+        UUID deckReportId;
+
+        UUID gameId;
+
+        String cardId;
+
     }
 }

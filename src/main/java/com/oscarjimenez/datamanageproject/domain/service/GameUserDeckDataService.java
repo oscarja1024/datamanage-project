@@ -1,6 +1,7 @@
 package com.oscarjimenez.datamanageproject.domain.service;
 
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.GameUserDataRequest;
+import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.InsertedId;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.UserGameDataResponse;
 
@@ -16,4 +17,9 @@ public interface GameUserDeckDataService {
     InsertedId insertDeckReport(GameUserDataRequest gameUserDataRequest);
 
     UserGameDataResponse getDeckDataReport(UUID deckId, UUID userId);
+
+    DeletedCount deleteDeckDataReport(UUID deckId, UUID deckReportId, UUID userId);
+
+    DeletedCount deleteOwnedDeck(UUID deckId, UUID userId);
+
 }

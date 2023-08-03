@@ -3,21 +3,16 @@ package com.oscarjimenez.datamanageproject.service.impl;
 import com.oscarjimenez.datamanageproject.api.utils.constants;
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.FindGameUserDataRequest;
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.GameUserDataRequest;
+import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.UpdateResponse;
 import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
-import com.oscarjimenez.datamanageproject.service.DTO.ChangeId;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.PuntuationDTO;
-import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
 import com.oscarjimenez.datamanageproject.service.DeckUserDataService;
 import com.oscarjimenez.dataminerproject.client.DTOS.DeckDTO;
-import com.oscarjimenez.dataminerproject.client.DTOS.GetCardsResponseDTO;
 import com.oscarjimenez.dataminerproject.client.DTOS.GetOneCardResponseDTO;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.ConditionalOperators;
 
-import java.beans.PropertyEditorSupport;
 import java.util.List;
 import java.util.UUID;
 
@@ -92,6 +87,16 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
         var insertedID = feignMongodbConnection.insertGameUserData(apiKey, GameUserDataRequest.builder().userId(userId).deckReport(deckReport).build());
 
         return insertedID.toString().isEmpty() || insertedID.toString().isBlank();
+    }
+
+    @Override
+    public DeletedCount deleteDeckReport(){
+        return null;
+    }
+
+    @Override
+    public DeletedCount deleteOwnedDeck(){
+        return null;
     }
 
     private String calculateMean(List<GetOneCardResponseDTO> cards, String value){

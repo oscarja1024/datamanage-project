@@ -1,7 +1,9 @@
 package com.oscarjimenez.datamanageproject.domain.service.impl;
 
+import com.oscarjimenez.datamanageproject.domain.DTOrequest.DeleteUserGameDataRequest;
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.FindGameUserDataRequest;
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.GameUserDataRequest;
+import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.InsertedId;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.UserGameDataResponse;
 import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
@@ -42,6 +44,16 @@ public class GameUserDeckDataServiceImpl implements GameUserDeckDataService {
                 .deckReport(deck.getDeckReport()).build();
     }
 
+    @Override
+    public DeletedCount deleteDeckDataReport(UUID deckId, UUID deckReportId, UUID userId) {
+        return feignMongodbConnection.deleteGameUserData(utilityDomainClass.getApiKey(), DeleteUserGameDataRequest.builder().filter(DeleteUserGameDataRequest.Filter.builder().userId(userId).deckId(deckId).build()).Build());
+        ;
+    }
+
+    @Override
+    public DeletedCount deleteOwnedDeck(UUID deckId, UUID userId) {
+        return feignMongodbConnection.deleteGameUserData(utilityDomainClass.getApiKey(), DeleteUserGameDataRequest.builder().filter(DeleteUserGameDataRequest.Filter.builder().userId(userId).deckId(deckId).build()).Build());
+    }
 
 
 }

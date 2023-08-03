@@ -1,7 +1,9 @@
 package com.oscarjimenez.datamanageproject.domain.service.impl;
 
+import com.oscarjimenez.datamanageproject.domain.DTOrequest.DeleteUserGameDataRequest;
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.FindGameUserDataRequest;
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.GameUserDataRequest;
+import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.InsertedId;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.UserGameDataResponse;
 import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
@@ -48,5 +50,10 @@ public class GameUserCardDataServiceImpl implements GameUserCardDataService {
                         .build());
         return UserGameDataResponse.builder().cards((userFavCards
                 .getCards())).userId(userId).build();
+    }
+
+    @Override
+    public DeletedCount deleteFavCard(UUID userId, String cardId){
+        return feignMongodbConnection.deleteGameUserData(utilityDomainClass.getApiKey(), DeleteUserGameDataRequest.builder().filter(DeleteUserGameDataRequest.Filter.builder().userId(userId).cardId(cardId).build()).Build());;
     }
 }

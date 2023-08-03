@@ -1,5 +1,6 @@
 package com.oscarjimenez.datamanageproject.service.impl;
 
+import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
 import com.oscarjimenez.datamanageproject.domain.service.GameUserCardDataService;
 import com.oscarjimenez.datamanageproject.service.CardDataClasifierService;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultCardDTO;
@@ -53,5 +54,10 @@ public class CardDataClasifierServiceImpl implements CardDataClasifierService {
         }
 
         return true;
+    }
+
+    @Override
+    public DeletedCount deleteFavoriteCards(String cardId, UUID userId) {
+        return null;
     }
 }

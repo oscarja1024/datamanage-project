@@ -1,5 +1,6 @@
 package com.oscarjimenez.datamanageproject.service;
 
+import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.UpdateResponse;
 import com.oscarjimenez.datamanageproject.service.DTO.ChangeId;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
@@ -21,4 +22,7 @@ public interface DeckUserDataService {
 
     boolean generateDeckResport(String deckId, UUID userId);
 
+    DeletedCount deleteDeckReport();
+
+    DeletedCount deleteOwnedDeck();
 }

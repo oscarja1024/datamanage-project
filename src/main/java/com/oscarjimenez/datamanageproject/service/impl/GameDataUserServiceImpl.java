@@ -1,8 +1,8 @@
 package com.oscarjimenez.datamanageproject.service.impl;
 
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.GameUserDataRequest;
+import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.InsertedId;
-import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
 import com.oscarjimenez.datamanageproject.domain.service.GameUserGameDataService;
 import com.oscarjimenez.datamanageproject.service.DTO.*;
 import com.oscarjimenez.datamanageproject.service.GameDataUserService;
@@ -26,6 +26,11 @@ public class GameDataUserServiceImpl implements GameDataUserService {
     public InsertedId saveGameReport(ResultGameDTO gameReport, UUID userId) {
 
         return gameUserGameDataService.saveGameData(GameUserDataRequest.builder().resultGame(gameReport).userId(userId).build());
+    }
+
+    @Override
+    public DeletedCount deleteGameReport(UUID gameId, UUID userId){
+        return null;
     }
 
 }

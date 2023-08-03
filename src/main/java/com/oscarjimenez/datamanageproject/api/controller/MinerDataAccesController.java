@@ -37,14 +37,14 @@ public class MinerDataAccesController {
     }
 
     @GetMapping("/byCardListAndHero")
-    public ResponseEntity<DeckDTO> getDeckByCardListAndHero(@RequestParam("cardIds") List<String> cardIds,
+    public ResponseEntity<DeckDTO> getDeckByCardListAndHero(@RequestBody List<String> cardIds,
                                                             @RequestParam("heroId") String heroId) {
         DeckDTO deck = deckDataService.getDeckByCardListAndHero(cardIds, heroId);
         return ResponseEntity.ok(deck);
     }
 
     @GetMapping("/byCardListAutoHero")
-    public ResponseEntity<DeckDTO> getDeckByCardListAutoHero(@RequestParam("cardIds") List<String> cardIds) {
+    public ResponseEntity<DeckDTO> getDeckByCardListAutoHero(@RequestBody List<String> cardIds) {
         DeckDTO deck = deckDataService.getDeckByCardListAutoHero(cardIds);
         return ResponseEntity.ok(deck);
     }
