@@ -1,5 +1,8 @@
 logs/           # Ignore the entire "logs" directory
 build/          # Ignore the entire "build" directory
+.classpath
+.project
+.settings/
 target/ 	# Ignore the entire "target" directory
 
 
