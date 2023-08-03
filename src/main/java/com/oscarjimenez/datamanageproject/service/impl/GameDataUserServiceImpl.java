@@ -30,7 +30,7 @@ public class GameDataUserServiceImpl implements GameDataUserService {
 
     @Override
     public DeletedCount deleteGameReport(UUID gameId, UUID userId){
-        return null;
+        return gameUserGameDataService.deleteGameData(gameId,userId);
     }
 
 }

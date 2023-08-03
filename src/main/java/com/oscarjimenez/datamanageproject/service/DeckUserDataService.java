@@ -21,7 +21,4 @@ public interface DeckUserDataService {
 
     boolean generateDeckResport(UUID deckId, UUID userId);
 
-    DeletedCount deleteDeckReport();
-
-    DeletedCount deleteOwnedDeck();
 }

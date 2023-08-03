@@ -58,6 +58,6 @@ public class CardDataClasifierServiceImpl implements CardDataClasifierService {
 
     @Override
     public DeletedCount deleteFavoriteCards(String cardId, UUID userId) {
-        return null;
+        return gameUserCardDataService.deleteFavCard(userId,cardId);
     }
 }

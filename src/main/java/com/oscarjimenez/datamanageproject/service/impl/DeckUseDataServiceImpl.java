@@ -89,16 +89,6 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
         return insertedID.toString().isEmpty() || insertedID.toString().isBlank();
     }
 
-    @Override
-    public DeletedCount deleteDeckReport(){
-        return null;
-    }
-
-    @Override
-    public DeletedCount deleteOwnedDeck(){
-        return null;
-    }
-
     private String calculateMean(List<GetOneCardResponseDTO> cards, String value){
 
         String result = "";
