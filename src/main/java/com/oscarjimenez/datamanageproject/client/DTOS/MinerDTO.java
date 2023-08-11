@@ -14,7 +14,7 @@ public class MinerDTO {
 
 
     private String cardId;
-    private List<String> cardIds;
+    private String cardIds;
     private String page;
     private Map<String,String> params;
 

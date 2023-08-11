@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface GameUserDeckDataService {
 
-    InsertedId insertOwnedDeck(List<String> cardIds, String heroId, UUID userId, UUID deckId);
+    InsertedId insertOwnedDeck(String cardIds, String heroId, UUID userId, UUID deckId);
 
     UserGameDataResponse getOwnedDeck(UUID deckId, UUID userId);
 

@@ -6,7 +6,6 @@ import com.oscarjimenez.datamanageproject.domain.DTOresponse.UpdateResponse;
 import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
 import com.oscarjimenez.datamanageproject.domain.service.DomainAccesUserSignUpService;
 import com.oscarjimenez.datamanageproject.domain.utils.utilityDomainClass;
-import lombok.experimental.UtilityClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

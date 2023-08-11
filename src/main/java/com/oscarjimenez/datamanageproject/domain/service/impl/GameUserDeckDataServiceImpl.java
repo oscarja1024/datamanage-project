@@ -14,14 +14,13 @@ import com.oscarjimenez.datamanageproject.client.DTOS.HeroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
 public class GameUserDeckDataServiceImpl implements GameUserDeckDataService {
     @Autowired
     private FeignMongodbConnection feignMongodbConnection;
-    public InsertedId insertOwnedDeck(List<String> cardIds, String heroId,UUID userId,UUID deckId){
+    public InsertedId insertOwnedDeck(String cardIds, String heroId,UUID userId,UUID deckId){
         return  feignMongodbConnection.insertGameUserData(utilityDomainClass.getApiKey(), GameUserDataRequest.builder()
                 .document(GameUserDataRequest.Document.builder().userId(userId).favDeck(DeckDTO.builder().hero(HeroDTO.builder().id(heroId).build()).cardsIds(cardIds).build()).build()).build());
     }

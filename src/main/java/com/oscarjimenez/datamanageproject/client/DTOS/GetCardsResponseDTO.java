@@ -17,13 +17,13 @@ public class GetCardsResponseDTO {
     private int pageCount;
     private int page;
 
-    public List<String> getCardIds(){
+    public String getCardIds(){
 
-        List<String> result = new ArrayList<>();
+        String result = "";
 
         for(GetOneCardResponseDTO card : this.cards){
             if(!card.getId().isEmpty()){
-                result.add(card.getId());
+                result.concat(" , "+card.getId());
             }
         }
 

@@ -7,6 +7,7 @@ import com.oscarjimenez.datamanageproject.client.DTOS.MinerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 @Service
@@ -16,16 +17,18 @@ public class DeckFinderDataServiceImpl implements DeckFinderDataService {
     FeignDataMinerConnection feignDataMinerConnection;
 
     @Override
-    public DeckDTO getDeckByCardListAndHero(List<String> cardIds, String heroId) {
+    public DeckDTO getDeckByCardListAndHero(String cardIds, String heroId) {
 
-        var result = feignDataMinerConnection.getDeckByCardListAndHero(MinerDTO.builder().cardIds(cardIds).cardId(heroId).page("0").build());
+        Map<String, String> params = new HashMap<>();
+        params.put("HERO", heroId);
+        var result = feignDataMinerConnection.getDeckByCardListAndHero(MinerDTO.builder().cardIds(cardIds).params(params).page("0").build());
 
         return result;
     }
 
     @Override
-    public DeckDTO getDeckByCardListAutoHero(List<String> cardIds) {
-        var result = feignDataMinerConnection.getDeckByCardListAndHero(MinerDTO.builder().cardIds(cardIds).page("0").build());
+    public DeckDTO getDeckByCardListAutoHero(String cardIds) {
+        var result = feignDataMinerConnection.getDeckByCardListAutoHero(MinerDTO.builder().cardIds(cardIds).page("0").build());
 
         return result;
     }

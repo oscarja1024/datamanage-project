@@ -50,7 +50,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
 
         Map<String,String> params = new HashMap<>();
         params.put("SORT",sort.getSort());
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).build());
+        var resultado = feignDataMinerConnection.getAllCardsSort(MinerDTO.builder().page(page).params(params).build());
         result.add(resultado);
 
 
@@ -67,7 +67,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
         Map<String,String> params = new HashMap<>();
         params.put("PAGE_SIZE",pageSize);
 
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        var resultado = feignDataMinerConnection.getAllCardsSetPageSize(MinerDTO.builder().page(page).params(params).build());
         result.add(resultado);
         return resultado;
     }
@@ -80,7 +80,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
         Map<String,String> params = new HashMap<>();
         params.put("SORT",sort.getSort());
         params.put("PAGE_SIZE",pageSize);
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        var resultado = feignDataMinerConnection.getAllCardsByPageSetPageSizeSort(MinerDTO.builder().page(page).params(params).build());
         result.add(resultado);
 
         return resultado;
@@ -93,10 +93,11 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
 
         Map<String,String> params = new HashMap<>();
         params.put("MANA", mana.getManaCost());
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).build());
+        var miner = MinerDTO.builder().params(params).page(page).build();
+        var resultado = feignDataMinerConnection.getAllCardsByManaCost(miner);
         result.add(resultado);
 
-        return resultado;
+        return  resultado;
     }
 
     @Override
@@ -107,8 +108,8 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
         Map<String,String> params = new HashMap<>();
         params.put("MANA", mana.getManaCost());
         params.put("ATTACK", attack.getAttack());
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).build());
-        result.add(resultado);
+        var resultado = feignDataMinerConnection.getAllCardsByManaCostAndAttack(MinerDTO.builder().params(params).page(page).build());
+        result.add( resultado);
 
         return resultado;
     }
@@ -119,7 +120,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
 
         Map<String,String> params = new HashMap<>();
         params.put("ATTACK", attack.getAttack());
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).build());
+        var resultado = feignDataMinerConnection.getAllCardsByAttack(MinerDTO.builder().params(params).page(page).build());
         result.add(resultado);
 
         return resultado;
@@ -131,7 +132,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
 
         Map<String,String> params = new HashMap<>();
         params.put("CARD_TYPE",cardType);
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        var resultado = feignDataMinerConnection.getAllCardsByType(MinerDTO.builder().params(params).page(page).build());
         result.add(resultado);
 
         return resultado;
@@ -144,7 +145,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
         Map<String,String> params = new HashMap<>();
         params.put("CARD_TYPE",cardType);
         params.put("ATTACK", attack.getAttack());
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        var resultado = feignDataMinerConnection.getAllCardsByTypeAndAttack(MinerDTO.builder().page(page).params(params).build());
         result.add(resultado);
 
         return resultado;
@@ -157,7 +158,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
         Map<String,String> params = new HashMap<>();
         params.put("CARD_TYPE",cardType);
         params.put("MANA", mana.getManaCost());
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        var resultado = feignDataMinerConnection.getAllCardsByTypeAndManaCost(MinerDTO.builder().page(page).params(params).build());
         result.add(resultado);
 
         return resultado;
@@ -171,7 +172,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
         params.put("CARD_TYPE",cardType);
         params.put("MANA", mana.getManaCost());
         params.put("ATTACK", attack.getAttack());
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        var resultado = feignDataMinerConnection.getAllCardsByTypeAndAttackAndManaCost(MinerDTO.builder().page(page).params(params).build());
         result.add(resultado);
 
         return resultado;
@@ -183,7 +184,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
 
         Map<String,String> params = new HashMap<>();
         params.put("HEALTH",health.getHealth());
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        var resultado = feignDataMinerConnection.getAllCardsByHealth(MinerDTO.builder().page(page).params(params).build());
         result.add(resultado);
 
         return resultado;
@@ -195,7 +196,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
 
         Map<String,String> params = new HashMap<>();
         params.put("GAME_MODE",gameMode);
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        var resultado = feignDataMinerConnection.getAllCardsByGameMode(MinerDTO.builder().page(page).params(params).build());
         result.add(resultado);
 
         return resultado;
@@ -207,7 +208,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
 
         Map<String,String> params = new HashMap<>();
         params.put("SPELL_SCHOOL",spellSchool);
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        var resultado = feignDataMinerConnection.getAllCardsBySpellSchool(MinerDTO.builder().page(page).params(params).build());
         result.add(resultado);
 
         return resultado;
@@ -219,7 +220,7 @@ public class CardDataFinderServiceImpl implements CardDataFinderService {
 
         Map<String,String> params = new HashMap<>();
         params.put("CARD_SET",cardSet);
-        var resultado = feignDataMinerConnection.getAllCards(MinerDTO.builder().page(page).params(params).build());
+        var resultado = feignDataMinerConnection.getAllCardsBySet(MinerDTO.builder().page(page).params(params).build());
         result.add(resultado);
 
         return resultado;

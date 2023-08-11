@@ -11,7 +11,7 @@ import java.util.UUID;
 @Data
 @Jacksonized
 public class InsertDeckRequest {
-        private List<String> cardIds;
+        private String cardIds;
         private String heroId;
         private UUID userId;
         private UUID deckId;

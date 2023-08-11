@@ -10,63 +10,63 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "FeignDataMinerConnection", url = "${hearthstoneMiner.url}")
 public interface FeignDataMinerConnection {
 
-    @GetMapping(path="/hearthstoneMiner/metadata", produces = "application/json")
+    @PostMapping(path="/metadata", produces = "application/json")
     MetadataResponseDTO getMetadata();
 
-    @GetMapping(path="/hearthstoneMiner/decksByCardsAndHero",consumes = "application/json" , produces = "application/json")
+    @PostMapping(path="/decksByCardsAndHero",consumes = "application/json" , produces = "application/json")
     DeckDTO getDeckByCardListAndHero(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/hearthstoneMiner/decksByCards", produces = "application/json")
+    @PostMapping(path="/decksByCards", produces = "application/json")
     DeckDTO getDeckByCardListAutoHero(@RequestBody MinerDTO request);
 
-    @PostMapping(path="/hearthstoneMiner/decksByCode", produces = "application/json")
+    @PostMapping(path="/decksByCode", produces = "application/json")
     DeckDTO getDeckByCode(@RequestBody MinerDTO request);
 
-    @PostMapping(path="/hearthstoneMiner/oneCard", produces = "application/json")
+    @PostMapping(path="/oneCard", produces = "application/json")
     GetOneCardResponseDTO getOneCardById(@RequestBody MinerDTO request);
 
-    @PostMapping(path="/hearthstoneMiner/cards", produces = "application/json")
+    @PostMapping(path="/cards", produces = "application/json")
     GetCardsResponseDTO getAllCards(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/hearthstoneMiner/cardsSort", produces = "application/json")
-    Object getAllCardsSort(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsSort", produces = "application/json")
+    GetCardsResponseDTO getAllCardsSort(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/hearthstoneMiner/cardsPageSize", produces = "application/json")
-    Object getAllCardsSetPageSize(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsPageSize", produces = "application/json")
+    GetCardsResponseDTO getAllCardsSetPageSize(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/hearthstoneMiner/cardsPageSizeSort", produces = "application/json")
-    Object getAllCardsByPageSetPageSizeSort(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsPageSizeSort", produces = "application/json")
+    GetCardsResponseDTO getAllCardsByPageSetPageSizeSort(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/hearthstoneMiner/cardsByManaCost", produces = "application/json")
-    Object getAllCardsByManaCost(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsByManaCost", produces = "application/json")
+    GetCardsResponseDTO getAllCardsByManaCost(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/cardsByManaCostAndAttack", consumes = "application/json", produces = "application/json")
-    Object getAllCardsByManaCostAndAttack(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsByManaCostAndAttack", consumes = "application/json", produces = "application/json")
+    GetCardsResponseDTO getAllCardsByManaCostAndAttack(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/cardsByAttack", consumes = "application/json", produces = "application/json")
-    Object getAllCardsByAttack(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsByAttack", consumes = "application/json", produces = "application/json")
+    GetCardsResponseDTO getAllCardsByAttack(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/cardsByType", consumes = "application/json", produces = "application/json")
-    Object getAllCardsByType(@RequestBody Object request);
+    @PostMapping(path="/cardsByType", consumes = "application/json", produces = "application/json")
+    GetCardsResponseDTO getAllCardsByType(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/cardsByAttackAndType", consumes = "application/json", produces = "application/json")
-    Object getAllCardsByTypeAndAttack(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsByAttackAndType", consumes = "application/json", produces = "application/json")
+    GetCardsResponseDTO getAllCardsByTypeAndAttack(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/cardsByAttackAndManaCost", consumes = "application/json", produces = "application/json")
-    Object getAllCardsByTypeAndManaCost(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsByAttackAndManaCost", consumes = "application/json", produces = "application/json")
+    GetCardsResponseDTO getAllCardsByTypeAndManaCost(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/cardsByAttackAndManaCostAndType", consumes = "application/json", produces = "application/json")
-    Object getAllCardsByTypeAndAttackAndManaCost(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsByAttackAndManaCostAndType", consumes = "application/json", produces = "application/json")
+    GetCardsResponseDTO getAllCardsByTypeAndAttackAndManaCost(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/cardsByHealth", consumes = "application/json", produces = "application/json")
-    Object getAllCardsByHealth(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsByHealth", consumes = "application/json", produces = "application/json")
+    GetCardsResponseDTO getAllCardsByHealth(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/cardsByGameMode", consumes = "application/json", produces = "application/json")
-    Object getAllCardsByGameMode(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsByGameMode", consumes = "application/json", produces = "application/json")
+    GetCardsResponseDTO getAllCardsByGameMode(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/cardsBySpellSchool", consumes = "application/json", produces = "application/json")
-    Object getAllCardsBySpellSchool(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsBySpellSchool", consumes = "application/json", produces = "application/json")
+    GetCardsResponseDTO getAllCardsBySpellSchool(@RequestBody MinerDTO request);
 
-    @GetMapping(path="/cardsBySet", consumes = "application/json", produces = "application/json")
-    Object getAllCardsBySet(@RequestBody MinerDTO request);
+    @PostMapping(path="/cardsBySet", consumes = "application/json", produces = "application/json")
+    GetCardsResponseDTO getAllCardsBySet(@RequestBody MinerDTO request);
 }

@@ -10,4 +10,4 @@ spring:
         collection2: userdata
 
 hearthstoneMiner:
-  url: http://localhost:7373
+  url: http://localhost:7373/hearthstoneMiner

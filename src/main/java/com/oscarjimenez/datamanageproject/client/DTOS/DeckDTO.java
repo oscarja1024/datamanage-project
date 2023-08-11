@@ -1,7 +1,6 @@
 package com.oscarjimenez.datamanageproject.client.DTOS;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.oscarjimenez.datamanageproject.client.DTOS.GetOneCardResponseDTO;
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
@@ -14,7 +13,7 @@ import java.util.UUID;
 @Builder
 public class DeckDTO {
 
-    private UUID deckCode;
+    private String deckCode;
     private String version;
     private String format;
     private HeroDTO hero;
@@ -22,7 +21,7 @@ public class DeckDTO {
     @JsonProperty("class")
     private ClassDTO clase;
     private List<GetOneCardResponseDTO> cards;
-    private List<String> cardsIds;
+    private String cardsIds;
     private int cardCount;
 
 

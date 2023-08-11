@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface DeckFinderDataService {
 
-    DeckDTO getDeckByCardListAndHero(List<String> cardIds, String heroId);
+    DeckDTO getDeckByCardListAndHero(String cardIds, String heroId);
 
-    DeckDTO getDeckByCardListAutoHero(List<String> cardIds);
+    DeckDTO getDeckByCardListAutoHero(String cardIds);
 
     DeckDTO getDeckByCode(String code);
 

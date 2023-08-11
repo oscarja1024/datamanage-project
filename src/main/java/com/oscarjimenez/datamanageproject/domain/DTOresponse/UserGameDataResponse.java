@@ -9,7 +9,6 @@ import com.oscarjimenez.datamanageproject.client.DTOS.GetCardsResponseDTO;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data

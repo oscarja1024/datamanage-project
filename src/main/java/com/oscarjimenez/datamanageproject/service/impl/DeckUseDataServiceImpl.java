@@ -5,7 +5,6 @@ import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
 import com.oscarjimenez.datamanageproject.client.DTOS.GetOneCardResponseDTO;
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.FindGameUserDataRequest;
 import com.oscarjimenez.datamanageproject.domain.DTOrequest.GameUserDataRequest;
-import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
 import com.oscarjimenez.datamanageproject.domain.DTOresponse.UpdateResponse;
 import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
@@ -71,14 +70,14 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
         var ownedDeck = this.findByUserIdandDeckId(userId,deckId);
 
         var deckReport = DeckReportDTO.builder()
-                .deckId(ownedDeck.getDeckCode())
+                .deckId(deckId)
                 .cardCount(String.valueOf(ownedDeck.getCardCount()))
                 .attackMean(this.calculateMean(ownedDeck.getCards(), constants.ATTACK))
                 .manaMean(this.calculateMean(ownedDeck.getCards(), constants.MANA))
                 .healthMean(this.calculateMean(ownedDeck.getCards(), constants.HEALTH))
                 .spellsMean(this.calculateMean(ownedDeck.getCards(), constants.SPELLS))
                 .minionCount(this.calculateMean(ownedDeck.getCards(), constants.MINION))
-                .puntuationDTO(this.getDeckPuntuation(ownedDeck.getDeckCode(), userId))
+                .puntuationDTO(this.getDeckPuntuation(deckId, userId))
                 .secretsCount(this.calculateMean(ownedDeck.getCards(), constants.SECRET))
                 .attackIncrease(this.calculateMean(ownedDeck.getCards(), constants.INCRESE))
                 .healMean(this.calculateMean(ownedDeck.getCards(), constants.HEAL))
