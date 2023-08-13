@@ -2,9 +2,11 @@ package com.oscarjimenez.datamanageproject.service.impl;
 
 
 import com.oscarjimenez.datamanageproject.domain.entity.GameEntity;
+import com.oscarjimenez.datamanageproject.domain.entity.UserEntity;
 import com.oscarjimenez.datamanageproject.domain.repository.GameRepository;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
 import com.oscarjimenez.datamanageproject.service.GameDataUserService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +44,7 @@ public class GameDataUserServiceImpl implements GameDataUserService {
                 .userAnnotationsDTO(resultGameDTO.getUserAnnotationsDTO().getUserAnnotations())
                 .heroHabilityUse(resultGameDTO.getHeroHabilityUse())
                 .numberOfSpellsUsed(resultGameDTO.getNumberOfSpellsUsed())
-                .userId(userId)
+                .user(UserEntity.builder().userId(userId).build())
                 .build();
 
         return gameRepository.saveAndFlush(report);
@@ -54,7 +56,7 @@ public class GameDataUserServiceImpl implements GameDataUserService {
     }
 
     @Override
-    public GameEntity getGameReportByGameIdAndUserId(UUID gameId, UUID userId) {
-        return gameRepository.findByGameIdAndUserId(gameId,userId);
+    public GameEntity getGameReportByGameIdAndUserId(UUID gameId, UserEntity userId) {
+        return gameRepository.findByGameIdAndUser(gameId,userId);
     }
 }

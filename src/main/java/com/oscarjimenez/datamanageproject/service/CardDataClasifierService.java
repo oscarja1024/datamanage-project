@@ -3,6 +3,7 @@ package com.oscarjimenez.datamanageproject.service;
 import com.oscarjimenez.datamanageproject.domain.entity.CardEntity;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultCardDTO;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface CardDataClasifierService {
@@ -12,4 +13,6 @@ public interface CardDataClasifierService {
     CardEntity saveFavoriteCards(String cardID, UUID userId) throws Exception;
 
     void deleteFavoriteCards(String cardId, UUID userId);
+
+    List<CardEntity> getFavoriteCardsByUser(UUID userId);
 }

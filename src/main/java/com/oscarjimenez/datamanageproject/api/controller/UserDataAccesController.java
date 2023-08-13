@@ -2,13 +2,11 @@ package com.oscarjimenez.datamanageproject.api.controller;
 
 import com.oscarjimenez.datamanageproject.api.DTO.InsertDeckRequest;
 import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
-import com.oscarjimenez.datamanageproject.domain.entity.CardEntity;
-import com.oscarjimenez.datamanageproject.domain.entity.DeckEntity;
-import com.oscarjimenez.datamanageproject.domain.entity.FavDeckEntity;
-import com.oscarjimenez.datamanageproject.domain.entity.GameEntity;
+import com.oscarjimenez.datamanageproject.domain.entity.*;
 import com.oscarjimenez.datamanageproject.service.*;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultCardDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +45,7 @@ public class UserDataAccesController {
 
     @GetMapping("/report/{gameId}/{userId}")
     public ResponseEntity<GameEntity> getGameReport(@PathVariable("gameId") UUID gameId,
-                                                    @PathVariable("userId") UUID userId) {
+                                                    @RequestBody UserEntity userId) {
         return ResponseEntity.ok(gameDataService.getGameReportByGameIdAndUserId(gameId,userId));
     }
 
@@ -90,15 +88,15 @@ public class UserDataAccesController {
     @GetMapping("/get/{deckId}/{userId}")
     public ResponseEntity<FavDeckEntity> getOwnedDeck(
             @PathVariable UUID deckId,
-            @PathVariable UUID userId
+            @RequestBody UserEntity userId
     ) {
-        return new ResponseEntity<>( deckDataService.findByUserIdandDeckId(userId,deckId),HttpStatus.OK);
+        return new ResponseEntity<>( deckDataService.findByUserIdandDeckId(deckId,userId),HttpStatus.OK);
     }
 
     @PostMapping("/insertReport")
     public ResponseEntity<DeckEntity> insertDeckReport(@PathVariable UUID deckId,
-                                                   @PathVariable UUID userId) {
-        return new ResponseEntity<>(deckDataService.generateDeckResport(deckId,userId), HttpStatus.CREATED);
+                                                   @RequestBody UserEntity userId) {
+        return new ResponseEntity<>(deckDataService.generateDeckResport(userId,deckId), HttpStatus.CREATED);
     }
 
     @GetMapping("/getReport/{deckReportId}")

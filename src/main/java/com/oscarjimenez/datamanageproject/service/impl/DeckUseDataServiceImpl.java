@@ -6,10 +6,10 @@ import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
 import com.oscarjimenez.datamanageproject.client.DTOS.GetOneCardResponseDTO;
 import com.oscarjimenez.datamanageproject.domain.entity.DeckEntity;
 import com.oscarjimenez.datamanageproject.domain.entity.FavDeckEntity;
+import com.oscarjimenez.datamanageproject.domain.entity.UserEntity;
 import com.oscarjimenez.datamanageproject.domain.repository.DeckRepository;
 import com.oscarjimenez.datamanageproject.domain.repository.FavDeckRepository;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
-import com.oscarjimenez.datamanageproject.service.DTO.PuntuationDTO;
 import com.oscarjimenez.datamanageproject.service.DeckUserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,15 +30,15 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
     DeckRepository deckRepository;
 
     @Override
-    public FavDeckEntity findByUserIdandDeckId(UUID userId, UUID deckId) {
+    public FavDeckEntity findByUserIdandDeckId( UUID deckId, UserEntity userId) {
 
-        var response = favdeckRepository.findByDeckIdAndUserId(userId,deckId);
+        var response = favdeckRepository.findByDeckIdAndUser(deckId,userId);
         return response;
     }
 
     @Override
     public FavDeckEntity saveOwnedDeck(InsertDeckRequest deckDTO, UUID userId) {
-        return favdeckRepository.saveAndFlush(FavDeckEntity.builder().cardIds(deckDTO.getCardIds()).heroId(deckDTO.getHeroId()).userId(userId).build());
+        return favdeckRepository.saveAndFlush(FavDeckEntity.builder().cardIds(deckDTO.getCardIds()).heroId(deckDTO.getHeroId()).user(UserEntity.builder().userId(userId).build()).build());
     }
 
     @Override
@@ -51,9 +51,9 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
     }
 
     @Override
-    public DeckEntity generateDeckResport(UUID deckId, UUID userId) {
+    public DeckEntity generateDeckResport(UserEntity userId, UUID deckId) {
 
-        var ownedDeck = this.findByUserIdandDeckId(userId,deckId);
+        var ownedDeck = this.findByUserIdandDeckId(deckId,userId);
 
         DeckDTO deck = deckFinderDataService.getDeckByCardListAndHero(ownedDeck.getCardIds(),ownedDeck.getHeroId());
 

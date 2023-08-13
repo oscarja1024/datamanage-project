@@ -1,12 +1,15 @@
 package com.oscarjimenez.datamanageproject.service.impl;
 
 import com.oscarjimenez.datamanageproject.domain.entity.CardEntity;
+import com.oscarjimenez.datamanageproject.domain.entity.UserEntity;
 import com.oscarjimenez.datamanageproject.domain.repository.CardRepository;
+import com.oscarjimenez.datamanageproject.domain.repository.UserRepository;
 import com.oscarjimenez.datamanageproject.service.CardDataClasifierService;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultCardDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 import static java.lang.Integer.parseInt;
@@ -18,6 +21,9 @@ public class CardDataClasifierServiceImpl implements CardDataClasifierService {
 
     @Autowired
     CardRepository cardRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public ResultCardDTO resultCardVsCard(String cardId1, String cardId2) {
@@ -47,11 +53,16 @@ public class CardDataClasifierServiceImpl implements CardDataClasifierService {
     @Override
     public CardEntity saveFavoriteCards(String cardID, UUID userId) {
 
-       return cardRepository.saveAndFlush(CardEntity.builder().idorSlug(cardID).userId(userId).build());
+       return cardRepository.saveAndFlush(CardEntity.builder().idorSlug(cardID).user(UserEntity.builder().userId(userId).build()).build());
     }
 
     @Override
     public void deleteFavoriteCards(String cardId, UUID userId) {
-        cardRepository.delete(CardEntity.builder().idorSlug(cardId).userId(userId).build());
+        cardRepository.delete(CardEntity.builder().idorSlug(cardId).user(UserEntity.builder().userId(userId).build()).build());
+    }
+
+    @Override
+    public List<CardEntity> getFavoriteCardsByUser(UUID userId) {
+        return userRepository.findCardsByUserId(userId);
     }
 }
