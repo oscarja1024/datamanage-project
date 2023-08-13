@@ -23,6 +23,7 @@ public class DeckDTO {
     private List<GetOneCardResponseDTO> cards;
     private String cardsIds;
     private int cardCount;
+    private UUID OwnedGameId;
 
 
 

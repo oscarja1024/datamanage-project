@@ -1,17 +1,17 @@
 package com.oscarjimenez.datamanageproject.service;
 
-import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
-import com.oscarjimenez.datamanageproject.domain.DTOresponse.InsertedId;
-import com.oscarjimenez.datamanageproject.service.DTO.*;
+
+import com.oscarjimenez.datamanageproject.domain.entity.GameEntity;
+import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
 
 import java.util.UUID;
 
 public interface GameDataUserService {
 
+    GameEntity saveGameReport(ResultGameDTO resultGameDTO, UUID userId);
 
-    ResultGameDTO getGameReport(UUID gameId, UUID userId);
+    void deleteGameReport(UUID gameId);
 
-    InsertedId saveGameReport(ResultGameDTO gameReport, UUID userId);
+    GameEntity getGameReportByGameIdAndUserId(UUID gameId, UUID userId);
 
-    DeletedCount deleteGameReport(UUID gameId, UUID userId);
 }

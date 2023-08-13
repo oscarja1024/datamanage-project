@@ -1,11 +1,11 @@
 package com.oscarjimenez.datamanageproject.api.controller;
 
 import com.oscarjimenez.datamanageproject.api.DTO.InsertDeckRequest;
-import com.oscarjimenez.datamanageproject.domain.DTOrequest.GameUserDataRequest;
-import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
-import com.oscarjimenez.datamanageproject.domain.DTOresponse.InsertedId;
-import com.oscarjimenez.datamanageproject.domain.DTOresponse.UserGameDataResponse;
-import com.oscarjimenez.datamanageproject.domain.service.GameUserDeckDataService;
+import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
+import com.oscarjimenez.datamanageproject.domain.entity.CardEntity;
+import com.oscarjimenez.datamanageproject.domain.entity.DeckEntity;
+import com.oscarjimenez.datamanageproject.domain.entity.FavDeckEntity;
+import com.oscarjimenez.datamanageproject.domain.entity.GameEntity;
 import com.oscarjimenez.datamanageproject.service.*;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultCardDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
@@ -29,13 +29,15 @@ public class UserDataAccesController {
     private DeckFinderDataService deckService;
 
     @Autowired
+    private DeckUserDataService deckDataService;
+
+    @Autowired
     private GameDataUserService gameDataService;
 
     @Autowired
     private MetadataClasifierService metadataService;
 
-    @Autowired
-    private GameUserDeckDataService gameUserDeckDataService;
+
 
     @PostMapping("/filter")
     public ResponseEntity<FilteredMetadataResponseDTO> filterMetadata(@RequestBody FilterDTO filters) {
@@ -44,17 +46,15 @@ public class UserDataAccesController {
     }
 
     @GetMapping("/report/{gameId}/{userId}")
-    public ResponseEntity<ResultGameDTO> getGameReport(@PathVariable("gameId") UUID gameId,
-                                                       @PathVariable("userId") UUID userId) {
-        ResultGameDTO result = gameDataService.getGameReport(gameId, userId);
-        return ResponseEntity.ok(result);
+    public ResponseEntity<GameEntity> getGameReport(@PathVariable("gameId") UUID gameId,
+                                                    @PathVariable("userId") UUID userId) {
+        return ResponseEntity.ok(gameDataService.getGameReportByGameIdAndUserId(gameId,userId));
     }
 
     @PostMapping("/report")
-    public ResponseEntity<InsertedId> saveGameReport(@RequestBody ResultGameDTO gameReport,
+    public ResponseEntity<GameEntity> saveGameReport(@RequestBody ResultGameDTO gameReport,
                                                      @RequestParam("userId") UUID userId) {
-        InsertedId savedId = gameDataService.saveGameReport(gameReport, userId);
-        return ResponseEntity.ok(savedId);
+        return ResponseEntity.ok(gameDataService.saveGameReport(gameReport,userId));
     }
 
     @GetMapping("/compare/{cardId1}/{cardId2}")
@@ -66,10 +66,10 @@ public class UserDataAccesController {
 
     @PostMapping("/favorites")
     public ResponseEntity<String> saveFavoriteCards(@RequestParam("cardID") String cardID,
-                                                    @RequestParam("userId") UUID userId) {
+                                                        @RequestParam("userId") UUID userId) {
         try {
-            boolean saved = cardService.saveFavoriteCards(cardID, userId);
-            if (saved) {
+            var response =  cardService.saveFavoriteCards(cardID, userId);
+            if (!response.getIdorSlug().isEmpty()) {
                 return ResponseEntity.ok("Favorite card saved successfully.");
             } else {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save favorite card.");
@@ -82,62 +82,54 @@ public class UserDataAccesController {
 
 
     @PostMapping("/insert")
-    public ResponseEntity<InsertedId> insertOwnedDeck(@RequestBody InsertDeckRequest request) {
-        InsertedId insertedId = gameUserDeckDataService.insertOwnedDeck(
-                request.getCardIds(),
-                request.getHeroId(),
-                request.getUserId(),
-                request.getDeckId()
-        );
-        return new ResponseEntity<>(insertedId, HttpStatus.CREATED);
+    public ResponseEntity<FavDeckEntity> insertOwnedDeck(@RequestBody InsertDeckRequest request) {
+
+        return new ResponseEntity<>(deckDataService.saveOwnedDeck(request,request.getUserId()), HttpStatus.CREATED);
     }
 
     @GetMapping("/get/{deckId}/{userId}")
-    public ResponseEntity<UserGameDataResponse> getOwnedDeck(
+    public ResponseEntity<FavDeckEntity> getOwnedDeck(
             @PathVariable UUID deckId,
             @PathVariable UUID userId
     ) {
-        UserGameDataResponse response = gameUserDeckDataService.getOwnedDeck(deckId, userId);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>( deckDataService.findByUserIdandDeckId(userId,deckId),HttpStatus.OK);
     }
 
     @PostMapping("/insertReport")
-    public ResponseEntity<InsertedId> insertDeckReport(@RequestBody GameUserDataRequest request) {
-        InsertedId insertedId = gameUserDeckDataService.insertDeckReport(request);
-        return new ResponseEntity<>(insertedId, HttpStatus.CREATED);
+    public ResponseEntity<DeckEntity> insertDeckReport(@PathVariable UUID deckId,
+                                                   @PathVariable UUID userId) {
+        return new ResponseEntity<>(deckDataService.generateDeckResport(deckId,userId), HttpStatus.CREATED);
     }
 
-    @GetMapping("/getReport/{deckId}/{userId}")
-    public ResponseEntity<UserGameDataResponse> getDeckDataReport(
-            @PathVariable UUID deckId,
-            @PathVariable UUID userId
+    @GetMapping("/getReport/{deckReportId}")
+    public ResponseEntity<DeckEntity> getDeckDataReport(
+            @PathVariable UUID deckReportId
     ) {
-        UserGameDataResponse response = gameUserDeckDataService.getDeckDataReport(deckId, userId);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(deckDataService.getDeckReport(deckReportId), HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteFavCatd/{cardId}/{userId}")
-    public ResponseEntity<DeletedCount> deleteFavCard(@PathVariable String cardId, @PathVariable UUID userId){
-        var response = cardService.deleteFavoriteCards(cardId, userId);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<String> deleteFavCard(@PathVariable String cardId, @PathVariable UUID userId){
+        cardService.deleteFavoriteCards(cardId, userId);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteGameReport/{gameId}/{userId}")
-    public ResponseEntity<DeletedCount> deleteGameReport(@PathVariable UUID gameId, @PathVariable UUID userId){
-        var response = gameDataService.deleteGameReport(gameId, userId);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<String> deleteGameReport(@PathVariable UUID gameId){
+        gameDataService.deleteGameReport(gameId);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteOwnedDeck/{deckId}/{userId}")
-    public ResponseEntity<DeletedCount> deleteOwnedDeck(@PathVariable UUID deckId, @PathVariable UUID userId){
-        var response = gameUserDeckDataService.deleteOwnedDeck(deckId, userId);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<String> deleteOwnedDeck(@PathVariable UUID deckId){
+        deckDataService.deleteOwnedDeck(deckId);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteDeckReport/{deckId}/{deckReportId}/{userId}")
-    public ResponseEntity<DeletedCount> deleteDeckReport(@PathVariable UUID deckId, @PathVariable  UUID deckReportId,@PathVariable UUID userId){
-        var response = gameUserDeckDataService.deleteDeckDataReport(deckId, deckReportId , userId);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<String> deleteDeckReport(@PathVariable  UUID deckReportId){
+        deckDataService.deleteDeckReport(deckReportId);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 
 }

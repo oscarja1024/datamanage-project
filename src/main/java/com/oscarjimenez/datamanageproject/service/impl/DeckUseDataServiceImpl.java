@@ -1,91 +1,88 @@
 package com.oscarjimenez.datamanageproject.service.impl;
 
+import com.oscarjimenez.datamanageproject.api.DTO.InsertDeckRequest;
 import com.oscarjimenez.datamanageproject.api.utils.constants;
 import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
 import com.oscarjimenez.datamanageproject.client.DTOS.GetOneCardResponseDTO;
-import com.oscarjimenez.datamanageproject.domain.DTOrequest.FindGameUserDataRequest;
-import com.oscarjimenez.datamanageproject.domain.DTOrequest.GameUserDataRequest;
-import com.oscarjimenez.datamanageproject.domain.DTOresponse.UpdateResponse;
-import com.oscarjimenez.datamanageproject.domain.client.FeignMongodbConnection;
+import com.oscarjimenez.datamanageproject.domain.entity.DeckEntity;
+import com.oscarjimenez.datamanageproject.domain.entity.FavDeckEntity;
+import com.oscarjimenez.datamanageproject.domain.repository.DeckRepository;
+import com.oscarjimenez.datamanageproject.domain.repository.FavDeckRepository;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.PuntuationDTO;
 import com.oscarjimenez.datamanageproject.service.DeckUserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class DeckUseDataServiceImpl implements DeckUserDataService {
 
     @Autowired
     DeckFinderDataServiceImpl deckFinderDataService;
 
     @Autowired
-    FeignMongodbConnection feignMongodbConnection;
+    FavDeckRepository favdeckRepository;
 
-    private String apiKey;
+    @Autowired
+    DeckRepository deckRepository;
 
     @Override
-    public DeckDTO findByUserIdandDeckId(UUID userId, UUID deckId) {
+    public FavDeckEntity findByUserIdandDeckId(UUID userId, UUID deckId) {
 
-        var deckCardListByUser = feignMongodbConnection.findUserGameData(apiKey, FindGameUserDataRequest.builder().build());
-
-        return deckFinderDataService.getDeckByCardListAndHero(deckCardListByUser.getCards().getCardIds(), "");
+        var response = favdeckRepository.findByDeckIdAndUserId(userId,deckId);
+        return response;
     }
 
     @Override
-    public boolean saveOwnedDeck(DeckDTO deckDTO) {
-
-        var insertedId = feignMongodbConnection.insertGameUserData(apiKey, GameUserDataRequest.builder().build());
-
-        return insertedId.toString().isEmpty() || insertedId.toString().isBlank();
+    public FavDeckEntity saveOwnedDeck(InsertDeckRequest deckDTO, UUID userId) {
+        return favdeckRepository.saveAndFlush(FavDeckEntity.builder().cardIds(deckDTO.getCardIds()).heroId(deckDTO.getHeroId()).userId(userId).build());
     }
 
     @Override
-    public UpdateResponse saveDeckPuntuation(PuntuationDTO puntuation, String deckId, String userId) {
+    public DeckEntity getDeckReport(UUID deckReportId) {
 
-        var updateResponse = feignMongodbConnection.updateUserGameData(apiKey, GameUserDataRequest.builder().build());
+        var response = deckRepository.findById(deckReportId);
 
-        return updateResponse;
+        return response.orElseGet(() -> DeckEntity.builder().build());
+
     }
 
     @Override
-    public DeckReportDTO getDeckReport(String deckReportId, String deckId, String userId) {
-
-        var deckData = feignMongodbConnection.findUserGameData(apiKey, FindGameUserDataRequest.builder().build());
-
-        return DeckReportDTO.builder().build();
-    }
-
-    public PuntuationDTO getDeckPuntuation(UUID deckId, UUID userId) {
-
-        var deckData = feignMongodbConnection.findUserGameDataOne(apiKey, FindGameUserDataRequest.builder().filter(FindGameUserDataRequest.Filter.builder().deckId(deckId).userId(userId).build()).build());
-
-        return deckData.getPuntuation();
-    }
-
-    @Override
-    public boolean generateDeckResport(UUID deckId, UUID userId) {
+    public DeckEntity generateDeckResport(UUID deckId, UUID userId) {
 
         var ownedDeck = this.findByUserIdandDeckId(userId,deckId);
 
+        DeckDTO deck = deckFinderDataService.getDeckByCardListAndHero(ownedDeck.getCardIds(),ownedDeck.getHeroId());
+
         var deckReport = DeckReportDTO.builder()
                 .deckId(deckId)
-                .cardCount(String.valueOf(ownedDeck.getCardCount()))
-                .attackMean(this.calculateMean(ownedDeck.getCards(), constants.ATTACK))
-                .manaMean(this.calculateMean(ownedDeck.getCards(), constants.MANA))
-                .healthMean(this.calculateMean(ownedDeck.getCards(), constants.HEALTH))
-                .spellsMean(this.calculateMean(ownedDeck.getCards(), constants.SPELLS))
-                .minionCount(this.calculateMean(ownedDeck.getCards(), constants.MINION))
-                .puntuationDTO(this.getDeckPuntuation(deckId, userId))
-                .secretsCount(this.calculateMean(ownedDeck.getCards(), constants.SECRET))
-                .attackIncrease(this.calculateMean(ownedDeck.getCards(), constants.INCRESE))
-                .healMean(this.calculateMean(ownedDeck.getCards(), constants.HEAL))
+                .cardCount(String.valueOf(deck.getCardCount()))
+                .attackMean(this.calculateMean(deck.getCards(), constants.ATTACK))
+                .manaMean(this.calculateMean(deck.getCards(), constants.MANA))
+                .healthMean(this.calculateMean(deck.getCards(), constants.HEALTH))
+                .spellsMean(this.calculateMean(deck.getCards(), constants.SPELLS))
+                .minionCount(this.calculateMean(deck.getCards(), constants.MINION))
+                .secretsCount(this.calculateMean(deck.getCards(), constants.SECRET))
+                .attackIncrease(this.calculateMean(deck.getCards(), constants.INCRESE))
+                .healMean(this.calculateMean(deck.getCards(), constants.HEAL))
                 .build(); // Se puede mejorar recorriendo solo una vez la lista
 
-        var insertedID = feignMongodbConnection.insertGameUserData(apiKey, (List<GameUserDataRequest>) GameUserDataRequest.builder().document(GameUserDataRequest.Document.builder().userId(userId).deckId(deckId).build()));
+        var entity = deckRepository.saveAndFlush(DeckEntity.builder().build());
 
-        return insertedID.toString().isEmpty() || insertedID.toString().isBlank();
+        return entity;
+    }
+
+    @Override
+    public void deleteDeckReport(UUID deckReportId) {
+        deckRepository.deleteById(deckReportId);
+    }
+
+    @Override
+    public void deleteOwnedDeck(UUID ownedDeckId) {
+        favdeckRepository.deleteById(ownedDeckId);
     }
 
     private String calculateMean(List<GetOneCardResponseDTO> cards, String value){

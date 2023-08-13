@@ -1,9 +1,9 @@
 package com.oscarjimenez.datamanageproject.service;
 
+import com.oscarjimenez.datamanageproject.api.DTO.InsertDeckRequest;
 import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
-import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
-import com.oscarjimenez.datamanageproject.domain.DTOresponse.UpdateResponse;
-import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
+import com.oscarjimenez.datamanageproject.domain.entity.DeckEntity;
+import com.oscarjimenez.datamanageproject.domain.entity.FavDeckEntity;
 import com.oscarjimenez.datamanageproject.service.DTO.PuntuationDTO;
 
 import java.util.UUID;
@@ -11,14 +11,17 @@ import java.util.UUID;
 public interface DeckUserDataService {
 
 
-    DeckDTO findByUserIdandDeckId(UUID userId, UUID deckId);
+    FavDeckEntity findByUserIdandDeckId(UUID userId, UUID deckId);
 
-    boolean saveOwnedDeck(DeckDTO deckDTO);
+    FavDeckEntity saveOwnedDeck(InsertDeckRequest deckDTO, UUID userId);
 
-    UpdateResponse saveDeckPuntuation(PuntuationDTO puntuation, String deckId, String userId);
+    DeckEntity getDeckReport(UUID deckReportId);
 
-    DeckReportDTO getDeckReport(String deckReportId, String deckId, String userId);
+    DeckEntity generateDeckResport(UUID deckId, UUID userId);
 
-    boolean generateDeckResport(UUID deckId, UUID userId);
+    void deleteDeckReport(UUID deckReportId);
+
+    void deleteOwnedDeck(UUID ownedDeckId);
+
 
 }

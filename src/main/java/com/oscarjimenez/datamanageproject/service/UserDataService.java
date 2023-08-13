@@ -1,12 +1,17 @@
 package com.oscarjimenez.datamanageproject.service;
 
+import com.oscarjimenez.datamanageproject.domain.entity.UserEntity;
+import com.oscarjimenez.datamanageproject.service.DTO.DeleteUserDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.UserDataDTO;
-import org.apache.catalina.User;
+
+import java.util.UUID;
 
 public interface UserDataService {
 
 
-    void userRegistration(UserDataDTO userData);
+    UserEntity userRegistration(UserDataDTO userData);
 
-    void userDataUpdate(UserDataDTO userDataDTO);
+    UserEntity getUserData(UserDataDTO userDataDTO);
+
+    void deleteUser(UUID userId);
 }

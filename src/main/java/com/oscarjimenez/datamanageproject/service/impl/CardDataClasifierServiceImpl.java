@@ -1,7 +1,7 @@
 package com.oscarjimenez.datamanageproject.service.impl;
 
-import com.oscarjimenez.datamanageproject.domain.DTOresponse.DeletedCount;
-import com.oscarjimenez.datamanageproject.domain.service.GameUserCardDataService;
+import com.oscarjimenez.datamanageproject.domain.entity.CardEntity;
+import com.oscarjimenez.datamanageproject.domain.repository.CardRepository;
 import com.oscarjimenez.datamanageproject.service.CardDataClasifierService;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultCardDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class CardDataClasifierServiceImpl implements CardDataClasifierService {
     CardDataFinderServiceImpl cardDataFinderService;
 
     @Autowired
-    GameUserCardDataService gameUserCardDataService;
+    CardRepository cardRepository;
 
     @Override
     public ResultCardDTO resultCardVsCard(String cardId1, String cardId2) {
@@ -45,19 +45,13 @@ public class CardDataClasifierServiceImpl implements CardDataClasifierService {
     }
 
     @Override
-    public boolean saveFavoriteCards(String cardID, UUID userId) throws Exception {
+    public CardEntity saveFavoriteCards(String cardID, UUID userId) {
 
-        try {
-            gameUserCardDataService.saveFavCard(userId,cardID);
-        } catch (Exception e){
-            throw new Exception("Por un problema interno no se ha podido guardar la carta de manera satisfactoriamente",e);
-        }
-
-        return true;
+       return cardRepository.saveAndFlush(CardEntity.builder().idorSlug(cardID).userId(userId).build());
     }
 
     @Override
-    public DeletedCount deleteFavoriteCards(String cardId, UUID userId) {
-        return gameUserCardDataService.deleteFavCard(userId,cardId);
+    public void deleteFavoriteCards(String cardId, UUID userId) {
+        cardRepository.delete(CardEntity.builder().idorSlug(cardId).userId(userId).build());
     }
 }

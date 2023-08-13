@@ -1,13 +1,11 @@
 spring:
-  data:
-    mongodb:
-      data-api:
-        base-url: https://eu-west-2.aws.data.mongodb-api.com/app/data-rieuu/endpoint/data/v1/action/
-        api-key: tizotQWBLnkJEBYvvCKbJ8UA2McbB9BstP3WHy19Lx1XAZDFnz5Bl3RkonJKNAHz
-        dataSource: Cluster0
-        database: gameanalytics-project
-        collection1: gamedata
-        collection2: userdata
+  datasource:
+    url: jdbc:h2:mem:gameUserData
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
 
 hearthstoneMiner:
   url: http://localhost:7373/hearthstoneMiner
