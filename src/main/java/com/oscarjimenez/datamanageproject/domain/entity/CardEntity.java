@@ -1,6 +1,7 @@
 package com.oscarjimenez.datamanageproject.domain.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +21,9 @@ public class CardEntity {
     @Id
     private String idorSlug;
 
-    @Column
-    private UUID userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private UserEntity user;
 
 }

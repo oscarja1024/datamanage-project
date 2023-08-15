@@ -1,5 +1,6 @@
 package com.oscarjimenez.datamanageproject.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.oscarjimenez.datamanageproject.service.DTO.PuntuationDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,8 +26,10 @@ public class DeckEntity {
     @Column
     private UUID deckId;
 
-    @Column
-    private UUID userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private UserEntity user;
 
     @Column
     private String manaMean;

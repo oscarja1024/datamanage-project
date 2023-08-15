@@ -9,6 +9,7 @@ import com.oscarjimenez.datamanageproject.domain.entity.FavDeckEntity;
 import com.oscarjimenez.datamanageproject.domain.entity.UserEntity;
 import com.oscarjimenez.datamanageproject.domain.repository.DeckRepository;
 import com.oscarjimenez.datamanageproject.domain.repository.FavDeckRepository;
+import com.oscarjimenez.datamanageproject.domain.repository.UserRepository;
 import com.oscarjimenez.datamanageproject.service.DTO.DeckReportDTO;
 import com.oscarjimenez.datamanageproject.service.DeckUserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
     @Autowired
     DeckRepository deckRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     @Override
     public FavDeckEntity findByUserIdandDeckId( UUID deckId, UserEntity userId) {
 
@@ -38,7 +42,9 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
 
     @Override
     public FavDeckEntity saveOwnedDeck(InsertDeckRequest deckDTO, UUID userId) {
-        return favdeckRepository.saveAndFlush(FavDeckEntity.builder().cardIds(deckDTO.getCardIds()).heroId(deckDTO.getHeroId()).user(UserEntity.builder().userId(userId).build()).build());
+        var user = userRepository.findById(userId);
+
+        return favdeckRepository.saveAndFlush(FavDeckEntity.builder().cardIds(deckDTO.getCardIds()).heroId(deckDTO.getHeroId()).user(user.get()).build());
     }
 
     @Override

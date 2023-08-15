@@ -53,7 +53,10 @@ public class CardDataClasifierServiceImpl implements CardDataClasifierService {
     @Override
     public CardEntity saveFavoriteCards(String cardID, UUID userId) {
 
-       return cardRepository.saveAndFlush(CardEntity.builder().idorSlug(cardID).user(UserEntity.builder().userId(userId).build()).build());
+       var user = userRepository.findById(userId).get();
+
+       return cardRepository.saveAndFlush(CardEntity.builder().idorSlug(cardID).user(user).build());
+
     }
 
     @Override

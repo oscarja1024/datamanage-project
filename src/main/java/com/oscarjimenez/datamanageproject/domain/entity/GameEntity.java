@@ -1,5 +1,6 @@
 package com.oscarjimenez.datamanageproject.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.oscarjimenez.datamanageproject.client.DTOS.ClassDTO;
 import com.oscarjimenez.datamanageproject.client.DTOS.DeckDTO;
@@ -105,7 +106,9 @@ public class GameEntity {
     @Temporal(TemporalType.DATE)
     private Date fechaReport;
 
-    @Column
-    private UUID userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private UserEntity user;
 
 }

@@ -1,5 +1,6 @@
 package com.oscarjimenez.datamanageproject.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,8 +21,10 @@ public class FavDeckEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID deckId;
 
-    @Column
-    private UUID userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    private UserEntity user;
 
     @Column
     private String cardIds;

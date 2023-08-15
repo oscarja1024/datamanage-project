@@ -93,10 +93,10 @@ public class UserDataAccesController {
         return new ResponseEntity<>( deckDataService.findByUserIdandDeckId(deckId,userId),HttpStatus.OK);
     }
 
-    @PostMapping("/insertReport")
+    @PostMapping("/insertReport/{deckId}/{userId}")
     public ResponseEntity<DeckEntity> insertDeckReport(@PathVariable UUID deckId,
-                                                   @RequestBody UserEntity userId) {
-        return new ResponseEntity<>(deckDataService.generateDeckResport(userId,deckId), HttpStatus.CREATED);
+                                                   @PathVariable UUID userId) {
+        return new ResponseEntity<>(deckDataService.generateDeckResport(UserEntity.builder().userId(userId).build(),deckId), HttpStatus.CREATED);
     }
 
     @GetMapping("/getReport/{deckReportId}")

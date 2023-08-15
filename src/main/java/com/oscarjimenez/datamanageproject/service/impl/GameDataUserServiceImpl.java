@@ -4,6 +4,7 @@ package com.oscarjimenez.datamanageproject.service.impl;
 import com.oscarjimenez.datamanageproject.domain.entity.GameEntity;
 import com.oscarjimenez.datamanageproject.domain.entity.UserEntity;
 import com.oscarjimenez.datamanageproject.domain.repository.GameRepository;
+import com.oscarjimenez.datamanageproject.domain.repository.UserRepository;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
 import com.oscarjimenez.datamanageproject.service.GameDataUserService;
 import org.apache.catalina.User;
@@ -18,8 +19,13 @@ public class GameDataUserServiceImpl implements GameDataUserService {
     @Autowired
     private GameRepository gameRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public GameEntity saveGameReport(ResultGameDTO resultGameDTO, UUID userId) {
+
+        var user = userRepository.findById(userId).get();
 
         var report = GameEntity.builder()
                 .cardsStoleInGame(resultGameDTO.getCardsStoleInGame())
@@ -44,7 +50,7 @@ public class GameDataUserServiceImpl implements GameDataUserService {
                 .userAnnotationsDTO(resultGameDTO.getUserAnnotationsDTO().getUserAnnotations())
                 .heroHabilityUse(resultGameDTO.getHeroHabilityUse())
                 .numberOfSpellsUsed(resultGameDTO.getNumberOfSpellsUsed())
-                .user(UserEntity.builder().userId(userId).build())
+                .user(user)
                 .build();
 
         return gameRepository.saveAndFlush(report);
