@@ -63,7 +63,9 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
 
         DeckDTO deck = deckFinderDataService.getDeckByCardListAndHero(ownedDeck.getCardIds(),ownedDeck.getHeroId());
 
-        var deckReport = DeckReportDTO.builder()
+        UserEntity user = userRepository.findById(userId.getUserId()).get();
+
+        var deckReport = DeckEntity.builder()
                 .deckId(deckId)
                 .cardCount(String.valueOf(deck.getCardCount()))
                 .attackMean(this.calculateMean(deck.getCards(), constants.ATTACK))
@@ -74,9 +76,10 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
                 .secretsCount(this.calculateMean(deck.getCards(), constants.SECRET))
                 .attackIncrease(this.calculateMean(deck.getCards(), constants.INCRESE))
                 .healMean(this.calculateMean(deck.getCards(), constants.HEAL))
+                .user(user)
                 .build(); // Se puede mejorar recorriendo solo una vez la lista
 
-        var entity = deckRepository.saveAndFlush(DeckEntity.builder().build());
+        var entity = deckRepository.saveAndFlush(deckReport);
 
         return entity;
     }
@@ -111,13 +114,15 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
             int number = 0;
             switch (value){
                 case constants.ATTACK:
-                    number = Integer.parseInt(card.getAttack());
+                    if(card.getAttack() != null && !card.getAttack().isEmpty())
+                        number = Integer.parseInt(card.getAttack());
                     break;
                 case constants.MANA:
                     number = Integer.parseInt(card.getManaCost());
                     break;
                 case constants.HEALTH:
-                    number = Integer.parseInt(card.getHealth());
+                    if(card.getHealth() != null && !card.getHealth().isEmpty())
+                        number = Integer.parseInt(card.getHealth());
                     break;
                 case constants.SPELLS:
                 case constants.SECRET:
