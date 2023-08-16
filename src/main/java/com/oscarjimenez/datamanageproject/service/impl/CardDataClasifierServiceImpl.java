@@ -65,7 +65,7 @@ public class CardDataClasifierServiceImpl implements CardDataClasifierService {
     }
 
     @Override
-    public List<CardEntity> getFavoriteCardsByUser(UUID userId) {
-        return userRepository.findCardsByUserId(userId);
+    public List<CardEntity> getFavoriteCardsByUser(UserEntity userId) {
+        return cardRepository.findByUser(userId);
     }
 }

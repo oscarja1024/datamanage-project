@@ -7,10 +7,10 @@ import com.oscarjimenez.datamanageproject.domain.repository.GameRepository;
 import com.oscarjimenez.datamanageproject.domain.repository.UserRepository;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
 import com.oscarjimenez.datamanageproject.service.GameDataUserService;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -64,5 +64,10 @@ public class GameDataUserServiceImpl implements GameDataUserService {
     @Override
     public GameEntity getGameReportByGameIdAndUserId(UUID gameId, UserEntity userId) {
         return gameRepository.findByGameIdAndUser(gameId,userId);
+    }
+
+    @Override
+    public List<GameEntity> findGameReportsByUserId(UserEntity userId){
+        return gameRepository.findByUser(userId);
     }
 }

@@ -6,6 +6,7 @@ import com.oscarjimenez.datamanageproject.domain.entity.UserEntity;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
 import org.apache.catalina.User;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface GameDataUserService {
@@ -16,4 +17,5 @@ public interface GameDataUserService {
 
     GameEntity getGameReportByGameIdAndUserId(UUID gameId, UserEntity userId);
 
+    List<GameEntity> findGameReportsByUserId(UserEntity userId);
 }

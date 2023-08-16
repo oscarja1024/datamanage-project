@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import com.oscarjimenez.datamanageproject.service.DTO.FilteredMetadataResponseDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.FilterDTO;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -128,6 +129,26 @@ public class UserDataAccesController {
     public ResponseEntity<String> deleteDeckReport(@PathVariable  UUID deckReportId){
         deckDataService.deleteDeckReport(deckReportId);
         return new ResponseEntity<>("", HttpStatus.OK);
+    }
+
+    @GetMapping("/game-reports")
+    public ResponseEntity<List<GameEntity>> findGameReportsByUserId(@RequestBody UserEntity userId) {
+        return ResponseEntity.ok(gameDataService.findGameReportsByUserId(userId));
+    }
+
+    @GetMapping("/ownedDecksByUser")
+    public ResponseEntity<List<FavDeckEntity>> findDecksByUserId(@RequestBody UserEntity userId) {
+        return ResponseEntity.ok(deckDataService.findDecksByUserId(userId));
+    }
+
+    @GetMapping("/deck-reports")
+    public ResponseEntity<List<DeckEntity>> findDeckReportsByUserId(@RequestBody UserEntity userId) {
+        return ResponseEntity.ok(deckDataService.findDeckReportsByUserId(userId));
+    }
+
+    @GetMapping("/favorite-cards")
+    public ResponseEntity<List<CardEntity>> getFavoriteCardsByUser(@RequestBody UserEntity userId) {
+        return ResponseEntity.ok(cardService.getFavoriteCardsByUser(userId));
     }
 
 }

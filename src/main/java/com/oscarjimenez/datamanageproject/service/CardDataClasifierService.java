@@ -1,6 +1,7 @@
 package com.oscarjimenez.datamanageproject.service;
 
 import com.oscarjimenez.datamanageproject.domain.entity.CardEntity;
+import com.oscarjimenez.datamanageproject.domain.entity.UserEntity;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultCardDTO;
 
 import java.util.List;
@@ -14,5 +15,5 @@ public interface CardDataClasifierService {
 
     void deleteFavoriteCards(String cardId, UUID userId);
 
-    List<CardEntity> getFavoriteCardsByUser(UUID userId);
+    List<CardEntity> getFavoriteCardsByUser(UserEntity userId);
 }

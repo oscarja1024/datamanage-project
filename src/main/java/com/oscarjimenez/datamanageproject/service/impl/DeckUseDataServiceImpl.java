@@ -91,6 +91,16 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
         favdeckRepository.deleteById(ownedDeckId);
     }
 
+    @Override
+    public List<FavDeckEntity> findDecksByUserId(UserEntity userId) {
+        return favdeckRepository.findByUser(userId) ;
+    }
+
+    @Override
+    public List<DeckEntity> findDeckReportsByUserId(UserEntity userId) {
+        return deckRepository.findByUser(userId);
+    }
+
     private String calculateMean(List<GetOneCardResponseDTO> cards, String value){
 
         String result = "";
@@ -170,6 +180,8 @@ public class DeckUseDataServiceImpl implements DeckUserDataService {
         return result;
 
     }
+
+
 }
 
 
