@@ -103,7 +103,7 @@ public class GameEntity {
     private int cardCount;
 
     @Column
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaReport;
 
     @ManyToOne
