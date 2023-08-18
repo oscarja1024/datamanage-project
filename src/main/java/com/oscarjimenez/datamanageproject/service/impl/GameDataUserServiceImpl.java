@@ -25,7 +25,7 @@ public class GameDataUserServiceImpl implements GameDataUserService {
     @Override
     public GameEntity saveGameReport(ResultGameDTO resultGameDTO, UUID userId) {
 
-        var user = userRepository.findById(userId).get();
+        var user = userRepository.findById(userId);
 
         var report = GameEntity.builder()
                 .cardsStoleInGame(resultGameDTO.getCardsStoleInGame())
@@ -50,7 +50,7 @@ public class GameDataUserServiceImpl implements GameDataUserService {
                 .userAnnotationsDTO(resultGameDTO.getUserAnnotationsDTO().getUserAnnotations())
                 .heroHabilityUse(resultGameDTO.getHeroHabilityUse())
                 .numberOfSpellsUsed(resultGameDTO.getNumberOfSpellsUsed())
-                .user(user)
+                .user(user.get())
                 .build();
 
         return gameRepository.saveAndFlush(report);
