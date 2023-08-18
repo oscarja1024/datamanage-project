@@ -47,5 +47,8 @@ public class UserEntity {
     @JsonManagedReference
     private List<DeckEntity> deckReports;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private SessionEntity session;
+
 
 }

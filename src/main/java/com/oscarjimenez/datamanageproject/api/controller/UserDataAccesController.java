@@ -37,23 +37,40 @@ public class UserDataAccesController {
     private MetadataClasifierService metadataService;
 
 
+    @Autowired
+    private SessionService sessionService;
+
 
     @PostMapping("/filter")
     public ResponseEntity<FilteredMetadataResponseDTO> filterMetadata(@RequestBody FilterDTO filters) {
+
         FilteredMetadataResponseDTO filteredMetadata = metadataService.filterMetadata(filters);
         return ResponseEntity.ok(filteredMetadata);
     }
 
-    @GetMapping("/report/{gameId}/{userId}")
+    @GetMapping("/report/{gameId}/{sessionId}")
     public ResponseEntity<GameEntity> getGameReport(@PathVariable("gameId") UUID gameId,
-                                                    @RequestBody UserEntity userId) {
-        return ResponseEntity.ok(gameDataService.getGameReportByGameIdAndUserId(gameId,userId));
+                                                    @RequestBody UserEntity userId,
+                                                    @PathVariable("sessionId") UUID sessionId) {
+
+        if(sessionService.sessionVerify(sessionId,userId)){
+            return ResponseEntity.ok(gameDataService.getGameReportByGameIdAndUserId(gameId,userId));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
-    @PostMapping("/report")
+    @PostMapping("/report/{sessionId}")
     public ResponseEntity<GameEntity> saveGameReport(@RequestBody ResultGameDTO gameReport,
-                                                     @RequestParam("userId") UUID userId) {
-        return ResponseEntity.ok(gameDataService.saveGameReport(gameReport,userId));
+                                                     @RequestParam("userId") UUID userId,
+                                                     @PathVariable("sessionId")UUID sessionId) {
+
+        if(sessionService.sessionVerify(sessionId,UserEntity.builder().userId(userId).build())){
+            return ResponseEntity.ok(gameDataService.saveGameReport(gameReport,userId));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
     }
 
     @GetMapping("/compare/{cardId1}/{cardId2}")
