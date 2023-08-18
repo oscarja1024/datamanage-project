@@ -35,7 +35,7 @@ public class MetadataClassifierServiceTest {
         when(feignDataMinerConnection.getMetadata()).thenReturn(metadataResponseDTO);
 
         // Configurar los filtros
-        FilterDTO filters = FilterDTO.builder().build();
+        FilterDTO filters = FilterDTO.builder().filterBy("sets").build();
 
         // Llamar al método y verificar el resultado
         FilteredMetadataResponseDTO result = metadataClasifierService.filterMetadata(filters);
