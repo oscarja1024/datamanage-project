@@ -17,11 +17,11 @@ import java.util.UUID;
 public class SessionEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     UUID sessionId;
 
     @OneToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "user_id")
     UserEntity user;
 
 }

@@ -7,9 +7,11 @@ import com.oscarjimenez.datamanageproject.domain.repository.SessionRepository;
 import com.oscarjimenez.datamanageproject.domain.repository.UserRepository;
 import com.oscarjimenez.datamanageproject.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class SessionServiceImpl implements SessionService {
 
     @Autowired
