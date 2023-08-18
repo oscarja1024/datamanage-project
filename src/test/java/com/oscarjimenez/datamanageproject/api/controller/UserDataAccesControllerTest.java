@@ -7,22 +7,15 @@ import com.oscarjimenez.datamanageproject.service.DTO.FilterDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.FilteredMetadataResponseDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultCardDTO;
 import com.oscarjimenez.datamanageproject.service.DTO.ResultGameDTO;
-import org.apache.catalina.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.Collections;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.*;
