@@ -59,7 +59,7 @@ public class UserDataAccesController {
         }
     }
 
-    @PostMapping("/report/{sessionId}")
+    @PostMapping("/report")
     public ResponseEntity<GameEntity> saveGameReport(@RequestBody ResultGameDTO gameReport,
                                                      @RequestParam("userId") UUID userId,
                                                      @RequestHeader("sessionId") UUID sessionId) {

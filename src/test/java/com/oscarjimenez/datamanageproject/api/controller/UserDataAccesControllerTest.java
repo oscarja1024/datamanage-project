@@ -92,7 +92,7 @@ public class UserDataAccesControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(userDataAccesController).build();
 
         // Perform the request and assert the response
-        mockMvc.perform(post("/userData/report/{sessionId}", UUID.randomUUID())
+        mockMvc.perform(post("/userData/report")
                         .contentType(MediaType.APPLICATION_JSON)
                         .header("sessionId", UUID.randomUUID())
                         .param("userId", UUID.randomUUID().toString())
