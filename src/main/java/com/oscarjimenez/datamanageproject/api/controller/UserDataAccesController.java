@@ -112,7 +112,7 @@ public class UserDataAccesController {
         }
     }
 
-    @GetMapping("/get/{deckId}/{userId}")
+    @GetMapping("/get/{deckId}")
     public ResponseEntity<FavDeckEntity> getOwnedDeck(
             @PathVariable UUID deckId,
             @RequestBody UserEntity userId,
