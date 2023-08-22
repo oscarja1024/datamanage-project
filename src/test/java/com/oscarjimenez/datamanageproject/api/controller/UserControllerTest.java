@@ -76,7 +76,7 @@ public class UserControllerTest {
 
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
 
-        mockMvc.perform(delete("/api/users/{userId}", userId))
+        mockMvc.perform(delete("/api/users/delete/{userId}", userId))
                 .andExpect(status().isNoContent());
     }
 
